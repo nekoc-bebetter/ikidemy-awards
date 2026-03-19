@@ -54,7 +54,9 @@ body{font-family:'Cormorant Garamond',Georgia,serif;color:var(--gold-light);over
 .pi:focus{outline:none;border-color:#5a4a6a;}
 .pi-n{width:120px;}.pi-a{width:95px;}.pi-q{width:45px;text-align:center;}
 .pw{font-size:10px;color:#4a3a5a;}.pd2{font-size:11px;color:#4a2a3a;cursor:pointer;}.pd2:hover{color:#c05060;}
-.adm-btns{margin-top:7px;display:flex;gap:8px;flex-wrap:wrap;}
+.adm-btns{margin-top:7px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+.reset-btn{margin-left:auto;padding:5px 14px;border:1px solid #5a2a2a;background:transparent;color:#8a4a4a;font-size:11px;cursor:pointer;border-radius:3px;font-family:'Cormorant Garamond',serif;transition:all .2s;}
+.reset-btn:hover{border-color:#c05060;color:#c05060;}
 
 #stageBg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
 #starCanvas{position:absolute;top:0;left:0;width:100%;height:100%;}
@@ -70,46 +72,37 @@ body{font-family:'Cormorant Garamond',Georgia,serif;color:var(--gold-light);over
 
 #stage{position:relative;z-index:5;padding:1.5rem 1rem;display:flex;flex-direction:column;align-items:center;min-height:480px;}
 body.display-mode #stage{padding:3rem 2rem;min-height:100vh;justify-content:center;}
-
 .filmStrip{display:flex;align-items:center;gap:8px;margin-bottom:1rem;opacity:.28;width:100%;max-width:540px;}
 .fhs{display:flex;gap:4px;}.fh{width:9px;height:9px;background:var(--bg);border:1px solid #3a2e4a;border-radius:2px;}
 .fln{flex:1;height:1px;background:#2a2030;}
-
 .preTitle{font-size:10px;letter-spacing:8px;color:#5a4a3a;margin-bottom:4px;text-align:center;font-family:'Playfair Display',serif;}
 .mainTitle{font-family:'Playfair Display',serif;letter-spacing:6px;color:var(--gold);text-align:center;font-weight:400;margin-bottom:4px;opacity:0;transform:translateY(10px);transition:opacity 1s,transform 1s;font-size:24px;}
 .mainTitle.show{opacity:1;transform:translateY(0);}
 .subTitle{letter-spacing:9px;color:#4a3a2a;text-align:center;margin-bottom:1.5rem;font-family:'Playfair Display',serif;font-size:11px;}
-
 body.display-mode .preTitle{font-size:14px;letter-spacing:10px;margin-bottom:8px;}
 body.display-mode .mainTitle{font-size:42px;letter-spacing:8px;margin-bottom:8px;}
 body.display-mode .subTitle{font-size:15px;letter-spacing:12px;margin-bottom:2.5rem;}
 
 #cbox{min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;position:relative;}
 body.display-mode #cbox{min-height:480px;}
-
 .idleTxt{color:#2a2035;letter-spacing:5px;font-family:'Playfair Display',serif;font-size:14px;}
 body.display-mode .idleTxt{font-size:20px;letter-spacing:8px;}
-
 .ring1{border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;position:relative;}
 .rp{border-radius:50%;overflow:hidden;}
 .rp img,.rpAv{width:100%;height:100%;object-fit:cover;display:block;}
 .rpAv{display:flex;align-items:center;justify-content:center;}
-
 .spinName{font-family:'Playfair Display',serif;letter-spacing:5px;color:var(--gold-light);margin-top:.9rem;text-align:center;font-size:20px;}
 .spinSub{letter-spacing:6px;color:var(--gold);margin-top:5px;text-align:center;font-family:'Playfair Display',serif;font-size:10px;}
 body.display-mode .spinName{font-size:34px;letter-spacing:7px;margin-top:1.5rem;}
 body.display-mode .spinSub{font-size:14px;letter-spacing:8px;margin-top:8px;}
-
 .wName{font-family:'Playfair Display',serif;letter-spacing:7px;color:#f0e8c8;text-align:center;margin-top:.8rem;font-size:26px;}
 .wPrize{letter-spacing:8px;color:var(--gold);text-align:center;margin-top:6px;font-family:'Playfair Display',serif;font-size:10px;}
 .wAmt{font-family:'Playfair Display',serif;letter-spacing:3px;color:var(--gold);text-align:center;margin-top:6px;font-size:26px;}
 body.display-mode .wName{font-size:48px;letter-spacing:10px;margin-top:1.5rem;}
 body.display-mode .wPrize{font-size:15px;letter-spacing:10px;margin-top:10px;}
 body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
-
 .ca{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:10;}
 .cp{position:absolute;opacity:0;}
-
 .drawArea{width:100%;max-width:400px;margin-top:1.2rem;text-align:center;}
 .dbtn{width:100%;padding:13px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:12px;letter-spacing:8px;cursor:pointer;font-family:'Playfair Display',serif;transition:all .25s;}
 .dbtn:hover{background:rgba(201,168,76,.08);}
@@ -120,15 +113,13 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
 #hpanel{position:relative;z-index:5;border-top:1px solid #16121e;padding:.8rem 1.4rem 1.5rem;}
 .hhd{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
 .hlbl{font-size:10px;letter-spacing:5px;color:#3a2a3a;font-family:'Playfair Display',serif;}
-.rbtn{font-size:10px;color:#4a3a4a;background:none;border:none;cursor:pointer;font-family:'Cormorant Garamond',serif;}
-.rbtn:hover{color:var(--gold);}
 .hlist{display:flex;gap:6px;flex-wrap:wrap;}
 .hi{display:flex;align-items:center;gap:5px;background:#12101a;border:1px solid #22202a;border-radius:3px;padding:4px 9px;}
 .hth{width:22px;height:22px;border-radius:50%;overflow:hidden;border:1px solid #2a2230;flex-shrink:0;}
 .hth img,.htav{width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;font-size:9px;}
 .hn{font-size:11px;color:#a09070;}.hp{font-size:10px;color:#7a6a4a;margin-left:3px;}
 
-#dbg{position:fixed;bottom:6px;right:8px;font-size:9px;color:#3a2a4a;font-family:monospace;z-index:99;pointer-events:none;text-align:right;}
+#dbg{position:fixed;bottom:6px;right:8px;font-size:9px;color:#3a2a4a;font-family:monospace;z-index:99;pointer-events:none;text-align:right;max-width:300px;}
 </style>
 </head>
 <body>
@@ -152,7 +143,7 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
       <div class="chip">可抽 <b id="sA">0</b></div>
       <div class="chip">已抽 <b id="sD">0</b></div>
     </div>
-    <span style="display:flex;align-items:center;margin-left:auto;"><span class="sdot wait" id="sdot"></span><span class="stxt" id="stxt">連線中...</span></span>
+    <span style="display:flex;align-items:center;"><span class="sdot wait" id="sdot"></span><span class="stxt" id="stxt">連線中...</span></span>
   </div>
   <div class="strip" id="strip"></div>
 </div>
@@ -164,6 +155,7 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
     <button class="ubtn" onclick="addPrize()">+ 新增獎項</button>
     <button class="ubtn" style="border-color:var(--gold);" onclick="applyAndSave()">套用 &#9654;</button>
     <button class="ubtn" onclick="savePrizes()" style="border-color:#5a4a6a;color:#8a7a9a;">儲存設定</button>
+    <button class="reset-btn" onclick="doReset()">&#9675; 重置所有紀錄</button>
   </div>
 </div>
 
@@ -192,13 +184,12 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
     <button class="dbtn" id="dbtn" onclick="doDraw()">DRAW</button>
     <div class="qnote" id="qnote"></div>
   </div>
-  <div class="dispBadge" id="dispBadge" style="display:none">&#9675; DISPLAY MODE</div>
+  <div class="dispBadge" id="dispBadge" style="display:none">&#9675; DISPLAY MODE — 等待後台操作</div>
 </div>
 
 <div id="hpanel" style="display:none">
   <div class="hhd">
     <span class="hlbl">WINNERS TONIGHT</span>
-    <button class="rbtn" id="resetBtn" onclick="doReset()" style="display:none">RESET ALL</button>
   </div>
   <div class="hlist" id="hlist"></div>
 </div>
@@ -218,18 +209,18 @@ const firebaseConfig={
   messagingSenderId:"512160039017",
   appId:"1:512160039017:web:509bef3431346653cde2f8"
 };
+
 const fbApp=initializeApp(firebaseConfig);
 const db=getDatabase(fbApp);
-const DB_REF=ref(db,'ika_v3');
+const DB=ref(db,'ika_v4');
 
 const BGS=["#1a1028","#0d1a28","#1a100d","#0d1a14","#1a1810","#1a0d1a"];
 const CLS=["#b090e0","#60a8d8","#d09060","#60c890","#d0c060","#d060a0"];
 
 let role=null;
 let spinIv=null;
-let isSaving=false;
-// Track last seen seq to avoid reacting to own saves
-let lastSeq=-1;
+let saving=false;
+let lastPushedSeq=-1;
 
 let S={
   prizes:[
@@ -241,68 +232,80 @@ let S={
     {name:"Fifth Prize",amt:"NT$3,000",quota:21},
   ],
   photos:[],drawn:[],hist:[],ap:0,
-  phase:'idle',
-  winner:null,cpname:'',cpamt:'',
-  seq:0
+  phase:'idle',winner:null,cpname:'',cpamt:'',seq:0
 };
 
-function log(m){document.getElementById('dbg').textContent=new Date().toLocaleTimeString()+' '+m;}
+function log(m){
+  console.log('[IKA]',m);
+  const el=document.getElementById('dbg');
+  if(el)el.innerHTML=new Date().toLocaleTimeString()+' '+m+'<br>'+el.innerHTML.split('<br>').slice(0,4).join('<br>');
+}
+
 function syncOk(ok){
   const d=document.getElementById('sdot'),t=document.getElementById('stxt');
   if(d)d.className='sdot '+(ok?'ok':'err');
   if(t)t.textContent=ok?'已連線':'連線失敗';
 }
 
-/* ── SAVE ── */
-function pushState(){
-  isSaving=true;
-  lastSeq=S.seq;
+function pushState(cb){
+  saving=true;
+  lastPushedSeq=S.seq;
   const payload=JSON.parse(JSON.stringify(S));
-  set(DB_REF,payload)
-    .then(()=>{syncOk(true);setTimeout(()=>{isSaving=false;},500);})
-    .catch(e=>{syncOk(false);isSaving=false;log('err:'+e.message);});
+  log('pushing seq='+S.seq+' phase='+S.phase);
+  set(DB,payload)
+    .then(()=>{syncOk(true);saving=false;if(cb)cb();})
+    .catch(e=>{syncOk(false);saving=false;log('SAVE ERR:'+e.message);console.error(e);});
 }
 
-/* ── LISTEN ── only display reacts; admin manages local state ── */
-onValue(DB_REF,snap=>{
+// ── LISTEN ──
+onValue(DB,snap=>{
   syncOk(true);
   const d=snap.val();
-  log('recv seq='+(d?d.seq:'null')+' phase='+(d?d.phase:'?'));
-  if(!d)return;
+  log('recv seq='+(d?d.seq:'null')+' phase='+(d?d.phase:'?')+' role='+role);
 
-  // Admin: just update non-operational fields from remote (prizes, photos, drawn, hist)
-  // but NEVER let remote override phase during local operation
+  if(!d){
+    // Database is empty — normal for first run
+    return;
+  }
+
+  const incomingSeq=d.seq||0;
+
   if(role==='admin'){
-    // only sync if seq changed and we didn't cause it
-    if(d.seq!==lastSeq){
-      S=Object.assign({},S,d);
+    // If we just pushed this seq, ignore (avoid echo)
+    if(incomingSeq===lastPushedSeq){log('admin: ignoring own echo');return;}
+    // Merge remote data but keep local phase control
+    S=Object.assign({},S,d);
+    // CRITICAL: if admin loads and sees spinning, auto-reset to idle
+    if(S.phase==='spinning'){
+      log('admin: found stuck spinning — resetting to idle');
+      S.phase='idle';S.seq=(S.seq||0)+1;
+      pushState(()=>{renderAdmin();renderHist();setIdle();});
+    } else {
       renderAdmin();renderHist();
+      if(S.phase==='winner'&&S.winner){showWinnerUI(S.winner,S.cpname,S.cpamt);}
     }
     return;
   }
 
-  // Display: always follow remote state
-  const prevSeq=S.seq;
-  S=Object.assign({},S,d);
-  renderHist();
+  if(role==='display'){
+    const prevSeq=S.seq||0;
+    S=Object.assign({},S,d);
+    renderHist();
 
-  if(d.seq===prevSeq)return; // no change
+    if(incomingSeq===prevSeq){log('display: same seq, skip');return;}
+    log('display: new seq='+incomingSeq+' phase='+S.phase);
 
-  log('display acting on phase='+S.phase);
-  if(S.phase==='spinning'){
-    stopSpin();
-    showSpinUI();
-  } else if(S.phase==='winner'&&S.winner){
-    stopSpin();
-    showWinnerUI(S.winner,S.cpname,S.cpamt);
-    doConfetti();
-  } else if(S.phase==='idle'){
-    stopSpin();
-    setIdle();
+    if(S.phase==='spinning'){
+      stopSpin();showSpinUI();
+    } else if(S.phase==='winner'&&S.winner){
+      stopSpin();showWinnerUI(S.winner,S.cpname,S.cpamt);doConfetti();
+    } else if(S.phase==='idle'){
+      stopSpin();setIdle();
+    }
   }
-},e=>{syncOk(false);log('listen err');});
+},e=>{syncOk(false);log('LISTEN ERR:'+e.message);console.error(e);});
 
-/* ── HELPERS ── */
+// ── HELPERS ──
 function avail(){return(S.photos||[]).filter(p=>!(S.drawn||[]).includes(p.id));}
 function won(i){return(S.hist||[]).filter(h=>h.pi===i).length;}
 
@@ -311,21 +314,21 @@ function mkAv(p,s){
   if(!p)return`<div class="rpAv" style="width:100%;height:100%;background:#1a1028;color:#b090e0;font-size:${f}px;">?</div>`;
   return p.src
     ?`<img src="${p.src}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`
-    :`<div class="rpAv" style="width:100%;height:100%;background:${p.bg};color:${p.col};font-size:${f}px;font-family:'Playfair Display',serif;">${p.name[0]}</div>`;
+    :`<div class="rpAv" style="width:100%;height:100%;background:${p.bg||'#1a1028'};color:${p.col||'#b090e0'};font-size:${f}px;font-family:'Playfair Display',serif;">${p.name[0]}</div>`;
 }
 
-function ringWrap(p,outer,inner,glowPx){
+function ringHtml(p,outer,inner,glow){
   return`<div style="position:relative;width:${outer}px;height:${outer}px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-    <div style="position:absolute;width:${outer}px;height:${outer}px;border-radius:50%;box-shadow:0 0 ${glowPx}px ${Math.round(glowPx/3)}px rgba(201,168,76,.26);"></div>
+    <div style="position:absolute;width:${outer}px;height:${outer}px;border-radius:50%;box-shadow:0 0 ${glow}px ${Math.round(glow/3)}px rgba(201,168,76,.26);"></div>
     <div class="ring1" style="width:${inner}px;height:${inner}px;">
       <div class="rp" id="spinPhoto" style="width:${inner-12}px;height:${inner-12}px;">${mkAv(p,inner-12)}</div>
     </div>
   </div>`;
 }
 
-function winnerRing(p,outer,inner,glowPx){
+function winnerHtml(p,outer,inner,glow){
   return`<div style="position:relative;width:${outer}px;height:${outer}px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-    <div style="position:absolute;width:${outer}px;height:${outer}px;border-radius:50%;box-shadow:0 0 ${glowPx}px ${Math.round(glowPx/4)}px rgba(201,168,76,.3);"></div>
+    <div style="position:absolute;width:${outer}px;height:${outer}px;border-radius:50%;box-shadow:0 0 ${glow}px ${Math.round(glow/4)}px rgba(201,168,76,.3);"></div>
     <div class="ring1" style="width:${inner}px;height:${inner}px;">
       <div style="position:absolute;width:${inner+16}px;height:${inner+16}px;border-radius:50%;border:1px solid #6a5a3a;top:-8px;left:-8px;"></div>
       <div style="position:absolute;width:${inner+30}px;height:${inner+30}px;border-radius:50%;border:1px solid #2a2018;top:-15px;left:-15px;"></div>
@@ -334,7 +337,7 @@ function winnerRing(p,outer,inner,glowPx){
   </div>`;
 }
 
-/* ── MODE SELECT ── */
+// ── ENTER MODE ──
 window.enterMode=function(m){
   role=m;
   document.getElementById('modeSelect').style.display='none';
@@ -346,20 +349,14 @@ window.enterMode=function(m){
 
   if(role==='admin'){
     document.body.classList.remove('display-mode');
-    document.getElementById('admWrap').style.display='block';
-    document.getElementById('prizeAdm').style.display='block';
-    document.getElementById('drawArea').style.display='block';
+    ['admWrap','prizeAdm','drawArea'].forEach(id=>document.getElementById(id).style.display='block');
     document.getElementById('dispBadge').style.display='none';
-    document.getElementById('resetBtn').style.display='inline';
     renderAdmin();
   } else {
     document.body.classList.add('display-mode');
-    document.getElementById('admWrap').style.display='none';
-    document.getElementById('prizeAdm').style.display='none';
-    document.getElementById('drawArea').style.display='none';
+    ['admWrap','prizeAdm','drawArea'].forEach(id=>document.getElementById(id).style.display='none');
     document.getElementById('dispBadge').style.display='block';
-    document.getElementById('resetBtn').style.display='none';
-    // Restore state on load
+    // Restore current state if already loaded
     if(S.phase==='winner'&&S.winner){showWinnerUI(S.winner,S.cpname,S.cpamt);}
     else if(S.phase==='spinning'){showSpinUI();}
     else{setIdle();}
@@ -367,7 +364,7 @@ window.enterMode=function(m){
   renderHist();
 };
 
-/* ── ADMIN ── */
+// ── ADMIN RENDER ──
 function renderAdmin(){
   renderPrizeList();renderStrip();updateStats();updateNote();
 }
@@ -386,9 +383,8 @@ function renderPrizeList(){
 }
 window.selAP=i=>{S.ap=i;renderPrizeList();updateNote();};
 window.applyAndSave=()=>{
-  S.seq=(S.seq||0)+1;
-  pushState();
-  renderPrizeList();updateNote();
+  S.phase='idle';S.seq=(S.seq||0)+1;
+  pushState();renderPrizeList();updateNote();
   document.getElementById('cbox').innerHTML=`<span class="idleTxt">&#9733; &nbsp; ${(S.prizes[S.ap]||{name:''}).name.toUpperCase()} &nbsp; &#9733;</span><div class="ca" id="ca"></div>`;
 };
 window.savePrizes=()=>{S.seq=(S.seq||0)+1;pushState();};
@@ -405,7 +401,7 @@ function updateNote(){
   document.getElementById('qnote').textContent=`${p.name}  ／  剩餘 ${rem} / ${p.quota}`;
   const btn=document.getElementById('dbtn');if(!btn)return;
   btn.disabled=rem<=0||S.phase==='spinning';
-  btn.textContent=rem<=0?'COMPLETED':S.phase==='spinning'?'DRAWING...':'DRAW';
+  btn.textContent=rem<=0?'COMPLETED':'DRAW';
 }
 function renderStrip(){
   if(role!=='admin')return;
@@ -423,16 +419,16 @@ function updateStats(){
   if(d)d.textContent=(S.drawn||[]).length;
 }
 
-/* ── SPIN / WINNER UI ── */
+// ── STAGE UI ──
 function isDisp(){return role==='display';}
 
 function showSpinUI(){
   const all=S.photos||[];if(!all.length)return;
-  const outer=isDisp()?260:190, inner=isDisp()?220:160, glow=isDisp()?80:50;
+  const outer=isDisp()?260:190,inner=isDisp()?220:160,glow=isDisp()?80:50;
   const first=all[Math.floor(Math.random()*all.length)];
   document.getElementById('cbox').innerHTML=`
     <div style="display:flex;flex-direction:column;align-items:center;">
-      ${ringWrap(first,outer,inner,glow)}
+      ${ringHtml(first,outer,inner,glow)}
       <div class="spinName" id="spinLabel">&#8212;</div>
       <div class="spinSub">${S.cpname}&nbsp;&#183;&nbsp;${S.cpamt}</div>
     </div>
@@ -440,8 +436,7 @@ function showSpinUI(){
   stopSpin();
   spinIv=setInterval(()=>{
     const r=all[Math.floor(Math.random()*all.length)];
-    const ph=document.getElementById('spinPhoto');
-    const lb=document.getElementById('spinLabel');
+    const ph=document.getElementById('spinPhoto'),lb=document.getElementById('spinLabel');
     if(ph)ph.innerHTML=mkAv(r,inner-12);
     if(lb)lb.textContent=r.name;
   },85);
@@ -450,11 +445,11 @@ function showSpinUI(){
 function stopSpin(){if(spinIv){clearInterval(spinIv);spinIv=null;}}
 
 function showWinnerUI(w,pname,pamt){
-  if(!w)return;
-  const outer=isDisp()?320:220, inner=isDisp()?270:180, glow=isDisp()?100:70;
+  if(!w){log('showWinnerUI: no winner data');return;}
+  const outer=isDisp()?320:220,inner=isDisp()?270:180,glow=isDisp()?100:70;
   document.getElementById('cbox').innerHTML=`
     <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
-      ${winnerRing(w,outer,inner,glow)}
+      ${winnerHtml(w,outer,inner,glow)}
       <div class="wName">${w.name}</div>
       <div class="wPrize">${pname}</div>
       <div class="wAmt">${pamt}</div>
@@ -466,34 +461,35 @@ function setIdle(){
   document.getElementById('cbox').innerHTML='<span class="idleTxt">&#9733; &nbsp; READY &nbsp; &#9733;</span><div class="ca" id="ca"></div>';
 }
 
-/* ── DRAW (admin only) ── */
+// ── DRAW ──
 window.doDraw=function(){
   if(role!=='admin')return;
-  const av2=avail();if(!av2.length||S.phase==='spinning')return;
+  const av2=avail();
+  if(!av2.length){log('no available people');return;}
+  if(S.phase==='spinning'){log('already spinning');return;}
   const p=(S.prizes||[])[S.ap];if(!p)return;
   const rem=p.quota-won(S.ap);if(rem<=0)return;
 
   const winner=av2[Math.floor(Math.random()*av2.length)];
+  log('drew winner: '+winner.name);
 
-  // 1. Push spinning
+  // Phase 1: spinning
   S.phase='spinning';S.cpname=p.name;S.cpamt=p.amt;S.winner=null;
   S.seq=(S.seq||0)+1;
-  pushState();
-  log('pushed spinning seq='+S.seq);
-
-  showSpinUI();
   document.getElementById('dbtn').disabled=true;
   document.getElementById('dbtn').textContent='DRAWING...';
+  showSpinUI();
+  pushState();
 
-  // 2. After 2.8s push winner
+  // Phase 2: reveal winner after 2.8s
   setTimeout(()=>{
     stopSpin();
-    S.drawn=(S.drawn||[]).concat(winner.id);
-    S.hist=(S.hist||[]).concat({...winner,pi:S.ap,pname:p.name,pamount:p.amt});
-    S.winner=winner;S.phase='winner';
+    S.drawn=[...(S.drawn||[]),winner.id];
+    S.hist=[...(S.hist||[]),{...winner,pi:S.ap,pname:p.name,pamount:p.amt}];
+    S.winner=winner;
+    S.phase='winner';
     S.seq=(S.seq||0)+1;
     pushState();
-    log('pushed winner seq='+S.seq);
 
     showWinnerUI(winner,p.name,p.amt);
     doConfetti();
@@ -504,7 +500,7 @@ window.doDraw=function(){
   },2800);
 };
 
-/* ── CONFETTI ── */
+// ── CONFETTI ──
 function doConfetti(){
   const box=document.getElementById('ca');if(!box)return;
   const cols=['#c9a84c','#f0e0a0','#e8c870','#fff8d0','#d4a830','#b8921e'];
@@ -521,7 +517,7 @@ function doConfetti(){
   }
 }
 
-/* ── HISTORY ── */
+// ── HISTORY ──
 function renderHist(){
   const hist=S.hist||[];
   if(!hist.length){document.getElementById('hpanel').style.display='none';return;}
@@ -533,17 +529,18 @@ function renderHist(){
     </div>`).join('');
 }
 
-/* ── RESET ── */
+// ── RESET ──
 window.doReset=function(){
   if(role!=='admin')return;
-  if(!confirm('確定重置所有抽獎紀錄？'))return;
+  if(!confirm('確定重置所有抽獎紀錄？這無法復原。'))return;
   S.drawn=[];S.hist=[];S.winner=null;S.phase='idle';S.seq=(S.seq||0)+1;
   pushState();setIdle();renderAdmin();renderHist();
   document.getElementById('dbtn').textContent='DRAW';
   document.getElementById('dbtn').disabled=false;
+  log('reset done');
 };
 
-/* ── FILE UPLOAD ── */
+// ── FILE UPLOAD ──
 document.getElementById('fi').addEventListener('change',function(e){
   Array.from(e.target.files).forEach(f=>{
     const r=new FileReader();
@@ -560,7 +557,7 @@ document.getElementById('fi').addEventListener('change',function(e){
   });this.value='';
 });
 
-/* ── STARS ── */
+// ── STARS ──
 function initStars(){
   const c=document.getElementById('starCanvas');
   c.width=window.innerWidth;c.height=window.innerHeight;
