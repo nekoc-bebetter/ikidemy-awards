@@ -15,18 +15,16 @@
 html,body{width:100%;min-height:100%;background:var(--bg);}
 body{font-family:'Cormorant Garamond',Georgia,serif;color:var(--gold-light);overflow-x:hidden;}
 
-/* MODE SELECT */
 #modeSelect{position:fixed;top:0;left:0;width:100%;height:100%;background:#07060a;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;}
 .ms-title{font-family:'Playfair Display',serif;font-size:24px;letter-spacing:7px;color:var(--gold);text-align:center;}
 .ms-sub{font-size:12px;letter-spacing:4px;color:var(--gold-dim);text-align:center;}
 .ms-btns{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;}
-.ms-btn{padding:18px 36px;border:1px solid;background:transparent;font-size:13px;letter-spacing:4px;cursor:pointer;font-family:'Playfair Display',serif;transition:all .25s;text-align:center;line-height:1.8;}
+.ms-btn{padding:18px 36px;border:1px solid;background:transparent;font-size:13px;letter-spacing:4px;cursor:pointer;font-family:'Playfair Display',serif;transition:all .25s;text-align:center;line-height:2;}
 .ms-btn.admin{border-color:var(--gold);color:var(--gold);}
 .ms-btn.admin:hover{background:rgba(201,168,76,.08);}
 .ms-btn.disp{border-color:#4a3a5a;color:#7a6a8a;}
 .ms-btn.disp:hover{background:rgba(74,58,90,.1);}
 
-/* ADMIN */
 #admWrap{background:var(--bg2);border-bottom:1px solid var(--border);position:relative;z-index:20;}
 .adm-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:.7rem 1.2rem;}
 .adm-lbl{font-size:11px;color:var(--gold-dim);letter-spacing:3px;font-family:'Playfair Display',serif;}
@@ -45,7 +43,6 @@ body{font-family:'Cormorant Garamond',Georgia,serif;color:var(--gold-light);over
 .tav{display:flex;align-items:center;justify-content:center;font-size:14px;}
 .tdel{position:absolute;top:-2px;right:-2px;width:13px;height:13px;border-radius:50%;background:#120810;color:#b05060;font-size:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid #3a1a2a;}
 
-/* PRIZE ADMIN */
 #prizeAdm{background:var(--bg3);border-bottom:1px solid #1a1820;padding:.7rem 1.2rem;position:relative;z-index:20;}
 .pa-t{font-size:10px;letter-spacing:3px;color:var(--gold-dim);margin-bottom:7px;font-family:'Playfair Display',serif;}
 .prize-list{display:flex;flex-direction:column;gap:4px;}
@@ -59,7 +56,6 @@ body{font-family:'Cormorant Garamond',Georgia,serif;color:var(--gold-light);over
 .pw{font-size:10px;color:#4a3a5a;}.pd2{font-size:11px;color:#4a2a3a;cursor:pointer;}.pd2:hover{color:#c05060;}
 .adm-btns{margin-top:7px;display:flex;gap:8px;flex-wrap:wrap;}
 
-/* STAGE BG */
 #stageBg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
 #starCanvas{position:absolute;top:0;left:0;width:100%;height:100%;}
 .curtL{position:absolute;top:0;left:0;height:100%;width:90px;background:linear-gradient(to right,rgba(40,5,20,.85),transparent);}
@@ -72,10 +68,7 @@ body{font-family:'Cormorant Garamond',Georgia,serif;color:var(--gold-light);over
 .spotBeam{width:100%;height:100%;background:linear-gradient(to bottom,rgba(255,235,130,.12) 0%,rgba(255,220,100,.05) 50%,transparent 100%);}
 .spotSrc{width:14px;height:14px;border-radius:50%;background:rgba(255,245,170,.65);position:absolute;top:0;left:50%;transform:translateX(-50%);}
 
-/* STAGE — ADMIN MODE */
 #stage{position:relative;z-index:5;padding:1.5rem 1rem;display:flex;flex-direction:column;align-items:center;min-height:480px;}
-
-/* DISPLAY STAGE — larger everything */
 body.display-mode #stage{padding:3rem 2rem;min-height:100vh;justify-content:center;}
 
 .filmStrip{display:flex;align-items:center;gap:8px;margin-bottom:1rem;opacity:.28;width:100%;max-width:540px;}
@@ -97,19 +90,16 @@ body.display-mode #cbox{min-height:480px;}
 .idleTxt{color:#2a2035;letter-spacing:5px;font-family:'Playfair Display',serif;font-size:14px;}
 body.display-mode .idleTxt{font-size:20px;letter-spacing:8px;}
 
-/* rings */
 .ring1{border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;position:relative;}
 .rp{border-radius:50%;overflow:hidden;}
 .rp img,.rpAv{width:100%;height:100%;object-fit:cover;display:block;}
 .rpAv{display:flex;align-items:center;justify-content:center;}
 
-/* spin text */
 .spinName{font-family:'Playfair Display',serif;letter-spacing:5px;color:var(--gold-light);margin-top:.9rem;text-align:center;font-size:20px;}
 .spinSub{letter-spacing:6px;color:var(--gold);margin-top:5px;text-align:center;font-family:'Playfair Display',serif;font-size:10px;}
 body.display-mode .spinName{font-size:34px;letter-spacing:7px;margin-top:1.5rem;}
 body.display-mode .spinSub{font-size:14px;letter-spacing:8px;margin-top:8px;}
 
-/* winner text */
 .wName{font-family:'Playfair Display',serif;letter-spacing:7px;color:#f0e8c8;text-align:center;margin-top:.8rem;font-size:26px;}
 .wPrize{letter-spacing:8px;color:var(--gold);text-align:center;margin-top:6px;font-family:'Playfair Display',serif;font-size:10px;}
 .wAmt{font-family:'Playfair Display',serif;letter-spacing:3px;color:var(--gold);text-align:center;margin-top:6px;font-size:26px;}
@@ -120,16 +110,13 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
 .ca{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:10;}
 .cp{position:absolute;opacity:0;}
 
-/* draw button */
 .drawArea{width:100%;max-width:400px;margin-top:1.2rem;text-align:center;}
 .dbtn{width:100%;padding:13px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:12px;letter-spacing:8px;cursor:pointer;font-family:'Playfair Display',serif;transition:all .25s;}
 .dbtn:hover{background:rgba(201,168,76,.08);}
 .dbtn:disabled{opacity:.25;cursor:not-allowed;}
 .qnote{font-size:10px;color:#4a3a2a;letter-spacing:2px;margin-top:5px;}
-
 .dispBadge{text-align:center;padding:.6rem;font-size:10px;letter-spacing:4px;color:#2a1a3a;font-family:'Playfair Display',serif;}
 
-/* history */
 #hpanel{position:relative;z-index:5;border-top:1px solid #16121e;padding:.8rem 1.4rem 1.5rem;}
 .hhd{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
 .hlbl{font-size:10px;letter-spacing:5px;color:#3a2a3a;font-family:'Playfair Display',serif;}
@@ -141,8 +128,7 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
 .hth img,.htav{width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;font-size:9px;}
 .hn{font-size:11px;color:#a09070;}.hp{font-size:10px;color:#7a6a4a;margin-left:3px;}
 
-/* debug log */
-#dbgLog{position:fixed;bottom:8px;right:8px;font-size:10px;color:#3a2a4a;font-family:monospace;z-index:50;text-align:right;pointer-events:none;}
+#dbg{position:fixed;bottom:6px;right:8px;font-size:9px;color:#3a2a4a;font-family:monospace;z-index:99;pointer-events:none;text-align:right;}
 </style>
 </head>
 <body>
@@ -151,14 +137,8 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
   <div class="ms-title">THE IKIDEMY AWARDS NIGHT</div>
   <div class="ms-sub">請選擇模式 · SELECT MODE</div>
   <div class="ms-btns">
-    <button class="ms-btn admin" onclick="enterMode('admin')">
-      &#9670; 後台管理<br>
-      <span style="font-size:10px;opacity:.6;letter-spacing:2px;">上傳照片 · 操作抽獎</span>
-    </button>
-    <button class="ms-btn disp" onclick="enterMode('display')">
-      &#9675; 展示模式<br>
-      <span style="font-size:10px;opacity:.6;letter-spacing:2px;">投影給員工</span>
-    </button>
+    <button class="ms-btn admin" onclick="enterMode('admin')">&#9670; 後台管理<br><span style="font-size:10px;opacity:.6;letter-spacing:2px;">上傳照片 · 操作抽獎</span></button>
+    <button class="ms-btn disp" onclick="enterMode('display')">&#9675; 展示模式<br><span style="font-size:10px;opacity:.6;letter-spacing:2px;">投影給員工</span></button>
   </div>
 </div>
 
@@ -223,11 +203,11 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
   <div class="hlist" id="hlist"></div>
 </div>
 
-<div id="dbgLog"></div>
+<div id="dbg"></div>
 
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import{getDatabase,ref,onValue,set,serverTimestamp}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import{getDatabase,ref,onValue,set}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 const firebaseConfig={
   apiKey:"AIzaSyCZBnFoK6a5w6uDCy6gr_9gLHka6Qc0n1M",
@@ -240,16 +220,17 @@ const firebaseConfig={
 };
 const fbApp=initializeApp(firebaseConfig);
 const db=getDatabase(fbApp);
-const lotteryRef=ref(db,'lottery2'); // fresh key to avoid stale data
+const DB_REF=ref(db,'ika_v3');
 
 const BGS=["#1a1028","#0d1a28","#1a100d","#0d1a14","#1a1810","#1a0d1a"];
 const CLS=["#b090e0","#60a8d8","#d09060","#60c890","#d0c060","#d060a0"];
 
 let role=null;
 let spinIv=null;
-let localSaving=false;
+let isSaving=false;
+// Track last seen seq to avoid reacting to own saves
+let lastSeq=-1;
 
-// Local state — admin is the single source of truth
 let S={
   prizes:[
     {name:"Grand Prize",amt:"NT$30,000",quota:1},
@@ -259,92 +240,101 @@ let S={
     {name:"Fourth Prize",amt:"NT$5,000",quota:10},
     {name:"Fifth Prize",amt:"NT$3,000",quota:21},
   ],
-  photos:[],
-  drawn:[],
-  hist:[],
-  ap:0,
-  phase:'idle',   // idle | spinning | winner
-  winner:null,
-  cpname:'',
-  cpamt:'',
-  seq:0           // increment on every state change so display can detect changes
+  photos:[],drawn:[],hist:[],ap:0,
+  phase:'idle',
+  winner:null,cpname:'',cpamt:'',
+  seq:0
 };
 
-function dbg(msg){
-  const el=document.getElementById('dbgLog');
-  if(el)el.textContent=new Date().toLocaleTimeString()+' '+msg;
+function log(m){document.getElementById('dbg').textContent=new Date().toLocaleTimeString()+' '+m;}
+function syncOk(ok){
+  const d=document.getElementById('sdot'),t=document.getElementById('stxt');
+  if(d)d.className='sdot '+(ok?'ok':'err');
+  if(t)t.textContent=ok?'已連線':'連線失敗';
 }
 
-function syncStatus(state){
-  const dot=document.getElementById('sdot');
-  const txt=document.getElementById('stxt');
-  if(!dot||!txt)return;
-  dot.className='sdot '+(state==='ok'?'ok':state==='err'?'err':'wait');
-  txt.textContent=state==='ok'?'已連線':state==='err'?'連線失敗':'連線中...';
-}
-
-// Save full state to Firebase
+/* ── SAVE ── */
 function pushState(){
-  localSaving=true;
+  isSaving=true;
+  lastSeq=S.seq;
   const payload=JSON.parse(JSON.stringify(S));
-  set(lotteryRef,payload)
-    .then(()=>{syncStatus('ok');setTimeout(()=>{localSaving=false;},300);})
-    .catch(e=>{syncStatus('err');localSaving=false;dbg('save err:'+e.message);});
+  set(DB_REF,payload)
+    .then(()=>{syncOk(true);setTimeout(()=>{isSaving=false;},500);})
+    .catch(e=>{syncOk(false);isSaving=false;log('err:'+e.message);});
 }
 
-// Listen
-onValue(lotteryRef,snap=>{
-  if(localSaving)return;
+/* ── LISTEN ── only display reacts; admin manages local state ── */
+onValue(DB_REF,snap=>{
+  syncOk(true);
   const d=snap.val();
-  dbg('recv phase='+(d?d.phase:'null')+' seq='+(d?d.seq:'?'));
-  syncStatus('ok');
+  log('recv seq='+(d?d.seq:'null')+' phase='+(d?d.phase:'?'));
   if(!d)return;
 
-  const prevPhase=S.phase;
-  const prevSeq=S.seq||0;
-  S=Object.assign({},S,d);
+  // Admin: just update non-operational fields from remote (prizes, photos, drawn, hist)
+  // but NEVER let remote override phase during local operation
+  if(role==='admin'){
+    // only sync if seq changed and we didn't cause it
+    if(d.seq!==lastSeq){
+      S=Object.assign({},S,d);
+      renderAdmin();renderHist();
+    }
+    return;
+  }
 
-  // Always re-render UI elements
-  if(role==='admin'){renderAdmin();}
+  // Display: always follow remote state
+  const prevSeq=S.seq;
+  S=Object.assign({},S,d);
   renderHist();
 
-  // Display reacts to phase changes
-  if(role==='display'){
-    if(S.seq!==prevSeq){
-      dbg('display: phase='+S.phase);
-      if(S.phase==='spinning'){
-        showSpinUI();
-      } else if(S.phase==='winner'&&S.winner){
-        stopSpin();
-        showWinnerUI(S.winner,S.cpname,S.cpamt);
-        doConfetti();
-      } else if(S.phase==='idle'){
-        stopSpin();
-        document.getElementById('cbox').innerHTML='<span class="idleTxt">&#9733; &nbsp; READY &nbsp; &#9733;</span><div class="ca" id="ca"></div>';
-      }
-    }
+  if(d.seq===prevSeq)return; // no change
+
+  log('display acting on phase='+S.phase);
+  if(S.phase==='spinning'){
+    stopSpin();
+    showSpinUI();
+  } else if(S.phase==='winner'&&S.winner){
+    stopSpin();
+    showWinnerUI(S.winner,S.cpname,S.cpamt);
+    doConfetti();
+  } else if(S.phase==='idle'){
+    stopSpin();
+    setIdle();
   }
-},err=>{syncStatus('err');dbg('listen err:'+err.message);});
+},e=>{syncOk(false);log('listen err');});
 
 /* ── HELPERS ── */
 function avail(){return(S.photos||[]).filter(p=>!(S.drawn||[]).includes(p.id));}
 function won(i){return(S.hist||[]).filter(h=>h.pi===i).length;}
+
 function mkAv(p,s){
   const f=Math.floor((s||44)*.36);
-  return p&&p.src
+  if(!p)return`<div class="rpAv" style="width:100%;height:100%;background:#1a1028;color:#b090e0;font-size:${f}px;">?</div>`;
+  return p.src
     ?`<img src="${p.src}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`
-    :`<div class="rpAv" style="width:100%;height:100%;background:${p?p.bg:'#1a1028'};color:${p?p.col:'#b090e0'};font-size:${f}px;font-family:'Playfair Display',serif;">${p?p.name[0]:'?'}</div>`;
+    :`<div class="rpAv" style="width:100%;height:100%;background:${p.bg};color:${p.col};font-size:${f}px;font-family:'Playfair Display',serif;">${p.name[0]}</div>`;
 }
-function mkRing(p,outer,inner,glow){
-  return`<div style="position:relative;width:${outer}px;height:${outer}px;display:flex;align-items:center;justify-content:center;">
-    <div style="position:absolute;width:${outer}px;height:${outer}px;border-radius:50%;box-shadow:0 0 ${glow}px ${Math.floor(glow/3)}px rgba(201,168,76,.25);"></div>
+
+function ringWrap(p,outer,inner,glowPx){
+  return`<div style="position:relative;width:${outer}px;height:${outer}px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+    <div style="position:absolute;width:${outer}px;height:${outer}px;border-radius:50%;box-shadow:0 0 ${glowPx}px ${Math.round(glowPx/3)}px rgba(201,168,76,.26);"></div>
     <div class="ring1" style="width:${inner}px;height:${inner}px;">
+      <div class="rp" id="spinPhoto" style="width:${inner-12}px;height:${inner-12}px;">${mkAv(p,inner-12)}</div>
+    </div>
+  </div>`;
+}
+
+function winnerRing(p,outer,inner,glowPx){
+  return`<div style="position:relative;width:${outer}px;height:${outer}px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+    <div style="position:absolute;width:${outer}px;height:${outer}px;border-radius:50%;box-shadow:0 0 ${glowPx}px ${Math.round(glowPx/4)}px rgba(201,168,76,.3);"></div>
+    <div class="ring1" style="width:${inner}px;height:${inner}px;">
+      <div style="position:absolute;width:${inner+16}px;height:${inner+16}px;border-radius:50%;border:1px solid #6a5a3a;top:-8px;left:-8px;"></div>
+      <div style="position:absolute;width:${inner+30}px;height:${inner+30}px;border-radius:50%;border:1px solid #2a2018;top:-15px;left:-15px;"></div>
       <div class="rp" style="width:${inner-12}px;height:${inner-12}px;">${mkAv(p,inner-12)}</div>
     </div>
   </div>`;
 }
 
-/* ── ENTER MODE ── */
+/* ── MODE SELECT ── */
 window.enterMode=function(m){
   role=m;
   document.getElementById('modeSelect').style.display='none';
@@ -369,13 +359,15 @@ window.enterMode=function(m){
     document.getElementById('drawArea').style.display='none';
     document.getElementById('dispBadge').style.display='block';
     document.getElementById('resetBtn').style.display='none';
-    // Restore current state from Firebase on load
+    // Restore state on load
     if(S.phase==='winner'&&S.winner){showWinnerUI(S.winner,S.cpname,S.cpamt);}
     else if(S.phase==='spinning'){showSpinUI();}
+    else{setIdle();}
   }
+  renderHist();
 };
 
-/* ── ADMIN RENDER ── */
+/* ── ADMIN ── */
 function renderAdmin(){
   renderPrizeList();renderStrip();updateStats();updateNote();
 }
@@ -403,8 +395,7 @@ window.savePrizes=()=>{S.seq=(S.seq||0)+1;pushState();};
 window.addPrize=()=>{(S.prizes=S.prizes||[]).push({name:"New Prize",amt:"NT$0",quota:1});renderPrizeList();};
 window.remPrize=i=>{
   if((S.prizes||[]).length<=1)return;
-  S.prizes.splice(i,1);
-  if(S.ap>=S.prizes.length)S.ap=S.prizes.length-1;
+  S.prizes.splice(i,1);if(S.ap>=S.prizes.length)S.ap=S.prizes.length-1;
   renderPrizeList();updateNote();
 };
 function updateNote(){
@@ -422,7 +413,7 @@ function renderStrip(){
     <div class="thumb${(S.drawn||[]).includes(p.id)?' drawn':''}">${mkAv(p,40)}
     ${!(S.drawn||[]).includes(p.id)?`<div class="tdel" onclick="delP(${p.id})">x</div>`:''}</div>`).join('');
 }
-window.delP=id=>{S.photos=(S.photos||[]).filter(p=>p.id!==id);renderStrip();updateStats();pushState();};
+window.delP=id=>{S.photos=(S.photos||[]).filter(p=>p.id!==id);renderStrip();updateStats();S.seq=(S.seq||0)+1;pushState();};
 function updateStats(){
   if(role!=='admin')return;
   const a=avail().length;
@@ -432,57 +423,47 @@ function updateStats(){
   if(d)d.textContent=(S.drawn||[]).length;
 }
 
-/* ── SPIN UI ── */
+/* ── SPIN / WINNER UI ── */
+function isDisp(){return role==='display';}
+
 function showSpinUI(){
-  const all=S.photos||[];
-  if(!all.length)return;
-  const isDisp=role==='display';
-  const outer=isDisp?260:190;
-  const inner=isDisp?220:160;
-  const glow=isDisp?80:50;
-  const box=document.getElementById('cbox');
+  const all=S.photos||[];if(!all.length)return;
+  const outer=isDisp()?260:190, inner=isDisp()?220:160, glow=isDisp()?80:50;
   const first=all[Math.floor(Math.random()*all.length)];
-  box.innerHTML=`
+  document.getElementById('cbox').innerHTML=`
     <div style="display:flex;flex-direction:column;align-items:center;">
-      ${mkRing(first,outer,inner,glow)}
-      <div class="spinName" id="sn0">&#8212;</div>
+      ${ringWrap(first,outer,inner,glow)}
+      <div class="spinName" id="spinLabel">&#8212;</div>
       <div class="spinSub">${S.cpname}&nbsp;&#183;&nbsp;${S.cpamt}</div>
     </div>
     <div class="ca" id="ca"></div>`;
   stopSpin();
   spinIv=setInterval(()=>{
     const r=all[Math.floor(Math.random()*all.length)];
-    const sp=box.querySelector('.rp');
-    const sn=document.getElementById('sn0');
-    if(sp)sp.innerHTML=mkAv(r,inner-12);
-    if(sn)sn.textContent=r.name;
+    const ph=document.getElementById('spinPhoto');
+    const lb=document.getElementById('spinLabel');
+    if(ph)ph.innerHTML=mkAv(r,inner-12);
+    if(lb)lb.textContent=r.name;
   },85);
 }
 
 function stopSpin(){if(spinIv){clearInterval(spinIv);spinIv=null;}}
 
 function showWinnerUI(w,pname,pamt){
-  stopSpin();
-  const isDisp=role==='display';
-  const outer=isDisp?320:220;
-  const inner=isDisp?270:180;
-  const glow=isDisp?100:70;
-  const box=document.getElementById('cbox');
-  box.innerHTML=`
+  if(!w)return;
+  const outer=isDisp()?320:220, inner=isDisp()?270:180, glow=isDisp()?100:70;
+  document.getElementById('cbox').innerHTML=`
     <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
-      <div style="position:relative;width:${outer}px;height:${outer}px;display:flex;align-items:center;justify-content:center;">
-        <div style="position:absolute;width:${outer}px;height:${outer}px;border-radius:50%;box-shadow:0 0 ${glow}px ${Math.floor(glow/4)}px rgba(201,168,76,.3);"></div>
-        <div class="ring1" style="width:${inner}px;height:${inner}px;">
-          <div style="position:absolute;width:${inner+16}px;height:${inner+16}px;border-radius:50%;border:1px solid #6a5a3a;top:-8px;left:-8px;"></div>
-          <div style="position:absolute;width:${inner+30}px;height:${inner+30}px;border-radius:50%;border:1px solid #2a2018;top:-15px;left:-15px;"></div>
-          <div class="rp" style="width:${inner-12}px;height:${inner-12}px;">${mkAv(w,inner-12)}</div>
-        </div>
-      </div>
+      ${winnerRing(w,outer,inner,glow)}
       <div class="wName">${w.name}</div>
       <div class="wPrize">${pname}</div>
       <div class="wAmt">${pamt}</div>
     </div>
     <div class="ca" id="ca"></div>`;
+}
+
+function setIdle(){
+  document.getElementById('cbox').innerHTML='<span class="idleTxt">&#9733; &nbsp; READY &nbsp; &#9733;</span><div class="ca" id="ca"></div>';
 }
 
 /* ── DRAW (admin only) ── */
@@ -492,36 +473,31 @@ window.doDraw=function(){
   const p=(S.prizes||[])[S.ap];if(!p)return;
   const rem=p.quota-won(S.ap);if(rem<=0)return;
 
-  // Pick winner immediately
   const winner=av2[Math.floor(Math.random()*av2.length)];
 
-  // Push spinning state
-  S.phase='spinning';
-  S.cpname=p.name;
-  S.cpamt=p.amt;
-  S.winner=null;
+  // 1. Push spinning
+  S.phase='spinning';S.cpname=p.name;S.cpamt=p.amt;S.winner=null;
   S.seq=(S.seq||0)+1;
   pushState();
-  dbg('pushed spinning seq='+S.seq);
+  log('pushed spinning seq='+S.seq);
 
-  // Show local spin
   showSpinUI();
   document.getElementById('dbtn').disabled=true;
   document.getElementById('dbtn').textContent='DRAWING...';
 
+  // 2. After 2.8s push winner
   setTimeout(()=>{
     stopSpin();
     S.drawn=(S.drawn||[]).concat(winner.id);
     S.hist=(S.hist||[]).concat({...winner,pi:S.ap,pname:p.name,pamount:p.amt});
-    S.winner=winner;
-    S.phase='winner';
+    S.winner=winner;S.phase='winner';
     S.seq=(S.seq||0)+1;
     pushState();
-    dbg('pushed winner seq='+S.seq);
+    log('pushed winner seq='+S.seq);
 
     showWinnerUI(winner,p.name,p.amt);
     doConfetti();
-    renderAdmin();
+    renderAdmin();renderHist();
     const rem2=p.quota-won(S.ap);
     document.getElementById('dbtn').disabled=rem2<=0;
     document.getElementById('dbtn').textContent=rem2>0?'DRAW AGAIN':'COMPLETED';
@@ -562,11 +538,9 @@ window.doReset=function(){
   if(role!=='admin')return;
   if(!confirm('確定重置所有抽獎紀錄？'))return;
   S.drawn=[];S.hist=[];S.winner=null;S.phase='idle';S.seq=(S.seq||0)+1;
-  pushState();
-  document.getElementById('cbox').innerHTML='<span class="idleTxt">&#9733; &nbsp; READY &nbsp; &#9733;</span><div class="ca" id="ca"></div>';
+  pushState();setIdle();renderAdmin();renderHist();
   document.getElementById('dbtn').textContent='DRAW';
   document.getElementById('dbtn').disabled=false;
-  renderAdmin();renderHist();
 };
 
 /* ── FILE UPLOAD ── */
@@ -581,7 +555,7 @@ document.getElementById('fi').addEventListener('change',function(e){
         bg:BGS[S.photos.length%6],
         col:CLS[S.photos.length%6]
       });
-      renderStrip();updateStats();pushState();
+      renderStrip();updateStats();S.seq=(S.seq||0)+1;pushState();
     };r.readAsDataURL(f);
   });this.value='';
 });
