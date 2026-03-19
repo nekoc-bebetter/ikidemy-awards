@@ -127,6 +127,7 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
 <div id="modeSelect">
   <div class="ms-title">THE IKIDEMY AWARDS NIGHT</div>
   <div class="ms-sub">請選擇模式 · SELECT MODE</div>
+  <div style="font-size:10px;color:#3a2a4a;letter-spacing:2px;font-family:monospace;margin-top:-1rem;">v2025.3</div>
   <div class="ms-btns">
     <button class="ms-btn admin" onclick="enterMode('admin')">&#9670; 後台管理<br><span style="font-size:10px;opacity:.6;letter-spacing:2px;">上傳照片 · 操作抽獎</span></button>
     <button class="ms-btn disp" onclick="enterMode('display')">&#9675; 展示模式<br><span style="font-size:10px;opacity:.6;letter-spacing:2px;">投影給員工</span></button>
@@ -195,7 +196,7 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
 </div>
 
 <div id="dbg"></div>
-<div style="position:fixed;bottom:6px;left:8px;font-size:9px;color:#2a1a3a;font-family:monospace;z-index:99;pointer-events:none;letter-spacing:1px;">v2025.2</div>
+<div style="">v2025.3</div>
 
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -353,11 +354,24 @@ window.enterMode=function(m){
     ['admWrap','prizeAdm','drawArea'].forEach(id=>document.getElementById(id).style.display='block');
     document.getElementById('dispBadge').style.display='none';
     renderAdmin();
+    // Restore admin view based on current phase
+    if(S.phase==='winner'&&S.winner){
+      showWinnerUI(S.winner,S.cpname,S.cpamt);
+      const rem=Math.max(0,(S.prizes[S.ap]||{quota:0}).quota-won(S.ap));
+      const btn=document.getElementById('dbtn');
+      if(btn){btn.disabled=rem<=0;btn.textContent=rem>0?'DRAW AGAIN':'COMPLETED';}
+    } else if(S.phase==='spinning'){
+      // Stuck spinning on reload — reset
+      S.phase='idle';S.seq=(S.seq||0)+1;
+      pushState(()=>{setIdle();updateNote();});
+    } else {
+      setIdle();
+    }
   } else {
     document.body.classList.add('display-mode');
     ['admWrap','prizeAdm','drawArea'].forEach(id=>document.getElementById(id).style.display='none');
     document.getElementById('dispBadge').style.display='block';
-    // Restore current state if already loaded
+    // Restore display view
     if(S.phase==='winner'&&S.winner){showWinnerUI(S.winner,S.cpname,S.cpamt);}
     else if(S.phase==='spinning'){showSpinUI();}
     else{setIdle();}
