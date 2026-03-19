@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ikidemy Awards Night — Lucky Draw</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --gold:#c9a84c;--gold-light:#e8d5a3;--gold-dim:#7a6a4a;
+  --bg:#07060a;--bg2:#0d0b10;--bg3:#0a0910;
+  --border:#2a2230;--border2:#1e1c28;
+  --purple-dark:#16101e;--purple-mid:#3a2e4a;
+}
+html,body{width:100%;min-height:100%;background:var(--bg);}
+body{font-family:'Cormorant Garamond',Georgia,serif;color:var(--gold-light);overflow-x:hidden;}
+
+/* ── ADMIN ── */
+#admWrap{background:var(--bg2);border-bottom:1px solid var(--border);position:relative;z-index:20;}
+.adm-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:.8rem 1.4rem;}
+.adm-lbl{font-size:11px;color:var(--gold-dim);letter-spacing:3px;font-family:'Playfair Display',serif;}
+.ubtn{padding:5px 13px;border:1px solid var(--purple-mid);background:var(--purple-dark);color:var(--gold);font-size:11px;cursor:pointer;border-radius:3px;font-family:'Cormorant Garamond',serif;letter-spacing:1px;transition:background .2s;}
+.ubtn:hover{background:#211530;}
+.chips{display:flex;gap:5px;}
+.chip{font-size:10px;color:var(--gold-dim);background:var(--purple-dark);border:1px solid var(--border);padding:2px 9px;border-radius:20px;}
+.chip b{color:var(--gold);}
+.tbtn{margin-left:auto;padding:6px 16px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:10px;cursor:pointer;letter-spacing:3px;border-radius:3px;font-family:'Playfair Display',serif;transition:all .2s;}
+.tbtn:hover{background:var(--purple-dark);}
+.strip{display:flex;gap:5px;flex-wrap:wrap;padding:.5rem 1.4rem .8rem;max-height:94px;overflow-y:auto;}
+.thumb{width:40px;height:40px;border-radius:50%;overflow:hidden;border:1.5px solid var(--purple-mid);position:relative;flex-shrink:0;}
+.thumb.drawn{opacity:.15;filter:grayscale(1);}
+.thumb img,.tav{width:100%;height:100%;object-fit:cover;}
+.tav{display:flex;align-items:center;justify-content:center;font-size:14px;}
+.tdel{position:absolute;top:-2px;right:-2px;width:13px;height:13px;border-radius:50%;background:#120810;color:#b05060;font-size:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid #3a1a2a;}
+
+/* ── PRIZE ADMIN ── */
+#prizeAdm{background:var(--bg3);border-bottom:1px solid var(--border2);padding:.8rem 1.4rem;position:relative;z-index:20;}
+.pa-title{font-size:10px;letter-spacing:3px;color:var(--gold-dim);margin-bottom:8px;font-family:'Playfair Display',serif;}
+.prize-list{display:flex;flex-direction:column;gap:5px;}
+.prize-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding:3px 0;}
+.prize-row.active-row{border-left:2px solid var(--gold);padding-left:6px;}
+.pr-arrow{font-size:12px;color:var(--gold-dim);cursor:pointer;width:16px;transition:color .2s;}
+.pr-arrow:hover,.prize-row.active-row .pr-arrow{color:var(--gold);}
+.pinp{background:var(--purple-dark);border:1px solid var(--border);color:var(--gold-light);font-size:11px;padding:4px 8px;border-radius:3px;font-family:'Cormorant Garamond',serif;}
+.pinp:focus{outline:none;border-color:#5a4a6a;}
+.pinp-name{width:130px;}
+.pinp-amt{width:100px;}
+.pinp-q{width:48px;text-align:center;}
+.pr-won{font-size:10px;color:#4a3a5a;}
+.pr-del{font-size:11px;color:#4a2a3a;cursor:pointer;}
+.pr-del:hover{color:#c05060;}
+.adm-btns{margin-top:8px;display:flex;gap:8px;}
+
+/* ── STAGE BACKGROUND ── */
+#stageBg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+#starCanvas{position:absolute;top:0;left:0;width:100%;height:100%;}
+.curtain-l,.curtain-r{position:absolute;top:0;height:100%;width:80px;}
+.curtain-l{left:0;background:linear-gradient(to right,rgba(40,5,20,.8),transparent);}
+.curtain-r{right:0;background:linear-gradient(to left,rgba(40,5,20,.8),transparent);}
+.floor-line{position:absolute;bottom:0;left:0;width:100%;height:2px;background:linear-gradient(to right,transparent,rgba(201,168,76,.2),transparent);}
+
+/* ── SPOTLIGHTS ── */
+.spot{position:absolute;top:-40px;width:200px;height:600px;transform-origin:top center;opacity:0;transition:opacity 1.5s ease;pointer-events:none;}
+.spot-l{left:8%;transform:rotate(-20deg);}
+.spot-r{right:8%;transform:rotate(20deg);}
+.spot.on{opacity:1;}
+.spot-beam{width:100%;height:100%;background:linear-gradient(to bottom,rgba(255,235,130,.1) 0%,rgba(255,220,100,.04) 55%,transparent 100%);}
+.spot-source{width:12px;height:12px;border-radius:50%;background:rgba(255,240,160,.6);position:absolute;top:0;left:50%;transform:translateX(-50%);}
+
+/* ── STAGE CONTENT ── */
+#stage{position:relative;z-index:5;padding:2rem 1rem 1.5rem;display:flex;flex-direction:column;align-items:center;min-height:520px;}
+.film-strip{display:flex;align-items:center;gap:8px;margin-bottom:1.2rem;opacity:.3;width:100%;max-width:520px;}
+.fholes{display:flex;gap:4px;}
+.fh{width:9px;height:9px;background:var(--bg);border:1px solid #3a2e4a;border-radius:2px;}
+.fline{flex:1;height:1px;background:#2a2030;}
+
+.pre-title{font-size:10px;letter-spacing:8px;color:#5a4a3a;margin-bottom:5px;text-align:center;font-family:'Playfair Display',serif;}
+.main-title{font-family:'Playfair Display',serif;font-size:26px;letter-spacing:5px;color:var(--gold);text-align:center;font-weight:400;margin-bottom:4px;opacity:0;transform:translateY(8px);transition:opacity .8s ease,transform .8s ease;}
+.main-title.show{opacity:1;transform:translateY(0);}
+.sub-title{font-size:11px;letter-spacing:8px;color:#4a3a2a;text-align:center;margin-bottom:2rem;font-family:'Playfair Display',serif;}
+
+/* ── CENTER BOX ── */
+#cbox{min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;position:relative;}
+.idle-txt{color:#2a2035;font-size:13px;letter-spacing:5px;font-family:'Playfair Display',serif;}
+
+/* spinning ring */
+.ring-wrap{position:relative;display:flex;align-items:center;justify-content:center;}
+.ring-glow{position:absolute;border-radius:50%;opacity:0;transition:opacity .6s;}
+.ring-glow.on{opacity:1;}
+.ring1{border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;position:relative;}
+.ring1::before{content:'';position:absolute;border-radius:50%;border:1px solid #5a4a3a;}
+.rp{border-radius:50%;overflow:hidden;}
+.rp img,.rp .av{width:100%;height:100%;object-fit:cover;display:block;}
+.av{display:flex;align-items:center;justify-content:center;}
+.spin-name{font-family:'Playfair Display',serif;font-size:22px;letter-spacing:5px;color:var(--gold-light);margin-top:1rem;text-align:center;}
+.spin-sub{font-size:10px;letter-spacing:6px;color:var(--gold);margin-top:6px;text-align:center;font-family:'Playfair Display',serif;}
+
+/* winner */
+.w-ring{border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;position:relative;}
+.w-ring::before,.w-ring::after{content:'';position:absolute;border-radius:50%;border:1px solid;}
+.w-ring::before{border-color:#6a5a3a;}
+.w-ring::after{border-color:#2a2018;}
+.w-rp{border-radius:50%;overflow:hidden;}
+.w-rp img,.w-rp .av{width:100%;height:100%;object-fit:cover;display:block;}
+.w-name{font-family:'Playfair Display',serif;font-size:28px;letter-spacing:7px;color:#f0e8c8;text-align:center;margin-top:.8rem;}
+.w-prize{font-size:10px;letter-spacing:8px;color:var(--gold);text-align:center;margin-top:6px;font-family:'Playfair Display',serif;}
+.w-amt{font-family:'Playfair Display',serif;font-size:28px;letter-spacing:3px;color:var(--gold);text-align:center;margin-top:6px;}
+
+/* confetti */
+.ca{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:10;}
+.cp{position:absolute;opacity:0;}
+
+/* draw button */
+.draw-area{width:100%;max-width:380px;margin-top:1.3rem;text-align:center;}
+.dbtn{width:100%;padding:14px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:12px;letter-spacing:8px;cursor:pointer;font-family:'Playfair Display',serif;transition:all .25s;}
+.dbtn:hover{background:rgba(201,168,76,.08);letter-spacing:10px;}
+.dbtn:disabled{opacity:.25;cursor:not-allowed;letter-spacing:8px;}
+.qnote{font-size:10px;color:#4a3a2a;letter-spacing:2px;margin-top:6px;font-family:'Cormorant Garamond',serif;}
+
+/* history */
+#hpanel{position:relative;z-index:5;border-top:1px solid #16121e;padding:.8rem 1.4rem 1.5rem;}
+.hhd{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.hlbl{font-size:10px;letter-spacing:5px;color:#3a2a3a;font-family:'Playfair Display',serif;}
+.rbtn{font-size:10px;color:#4a3a4a;background:none;border:none;cursor:pointer;font-family:'Cormorant Garamond',serif;letter-spacing:1px;}
+.rbtn:hover{color:var(--gold);}
+.hlist{display:flex;gap:6px;flex-wrap:wrap;}
+.hi{display:flex;align-items:center;gap:5px;background:#12101a;border:1px solid #22202a;border-radius:3px;padding:4px 9px;}
+.hth{width:22px;height:22px;border-radius:50%;overflow:hidden;border:1px solid #2a2230;flex-shrink:0;}
+.hth img,.htav{width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;font-size:9px;}
+.hn{font-size:11px;color:#a09070;font-family:'Cormorant Garamond',serif;}
+.hp{font-size:10px;color:#7a6a4a;margin-left:3px;}
+</style>
+</head>
+<body>
+
+<!-- ADMIN PANEL -->
+<div id="admWrap">
+  <div class="adm-bar">
+    <span class="adm-lbl">&#9670; BACKSTAGE</span>
+    <button class="ubtn" onclick="document.getElementById('fi').click()">上傳員工照片</button>
+    <input type="file" id="fi" accept="image/*" multiple style="display:none">
+    <div class="chips">
+      <div class="chip">總人數 <b id="sT">0</b></div>
+      <div class="chip">可抽 <b id="sA">0</b></div>
+      <div class="chip">已抽 <b id="sD">0</b></div>
+    </div>
+    <button class="tbtn" id="tbtn" onclick="toggleMode()">&#9654; 展示模式</button>
+  </div>
+  <div class="strip" id="strip"></div>
+</div>
+
+<!-- PRIZE ADMIN -->
+<div id="prizeAdm">
+  <div class="pa-title">&#9670; 獎項設定（員工看不到）</div>
+  <div class="prize-list" id="prizeList"></div>
+  <div class="adm-btns">
+    <button class="ubtn" onclick="addPrize()">+ 新增獎項</button>
+    <button class="ubtn" style="border-color:var(--gold);" onclick="applyPrize()">套用選取獎項 &#9654;</button>
+  </div>
+</div>
+
+<!-- STAGE BACKGROUND -->
+<div id="stageBg">
+  <canvas id="starCanvas"></canvas>
+  <div class="spot spot-l" id="spotL"><div class="spot-source"></div><div class="spot-beam"></div></div>
+  <div class="spot spot-r" id="spotR"><div class="spot-source"></div><div class="spot-beam"></div></div>
+  <div class="curtain-l"></div>
+  <div class="curtain-r"></div>
+  <div class="floor-line"></div>
+</div>
+
+<!-- STAGE -->
+<div id="stage">
+  <div class="film-strip">
+    <div class="fholes"><div class="fh"></div><div class="fh"></div><div class="fh"></div></div>
+    <div class="fline"></div>
+    <div class="fholes"><div class="fh"></div><div class="fh"></div><div class="fh"></div></div>
+  </div>
+  <div class="pre-title">THE IKIDEMY PRESENTS</div>
+  <div class="main-title" id="mainTitle">THE IKIDEMY AWARDS NIGHT</div>
+  <div class="sub-title">LUCKY DRAW</div>
+
+  <div id="cbox">
+    <span class="idle-txt">&#9733; &nbsp; READY &nbsp; &#9733;</span>
+    <div class="ca" id="ca"></div>
+  </div>
+
+  <div class="draw-area">
+    <button class="dbtn" id="dbtn" onclick="draw()">DRAW</button>
+    <div class="qnote" id="qnote"></div>
+  </div>
+</div>
+
+<!-- HISTORY -->
+<div id="hpanel" style="display:none">
+  <div class="hhd">
+    <span class="hlbl">WINNERS TONIGHT</span>
+    <button class="rbtn" onclick="resetAll()">RESET ALL</button>
+  </div>
+  <div class="hlist" id="hlist"></div>
+</div>
+
+<script>
+const BGS=["#1a1028","#0d1a28","#1a100d","#0d1a14","#1a1810","#1a0d1a"];
+const CLS=["#b090e0","#60a8d8","#d09060","#60c890","#d0c060","#d060a0"];
+
+let prizes=[
+  {name:"Grand Prize",amt:"NT$30,000",quota:1},
+  {name:"First Prize",amt:"NT$20,000",quota:2},
+  {name:"Second Prize",amt:"NT$10,000",quota:10},
+  {name:"Third Prize",amt:"NT$8,000",quota:10},
+  {name:"Fourth Prize",amt:"NT$5,000",quota:10},
+  {name:"Fifth Prize",amt:"NT$3,000",quota:21},
+];
+let photos=[];
+let drawn=new Set(),hist=[],ap=0,spinning=false,adminMode=true;
+
+function avail(){return photos.filter(p=>!drawn.has(p.id));}
+function won(i){return hist.filter(h=>h.pi===i).length;}
+function av(p,s){
+  const f=Math.floor((s||40)*.35);
+  return p.src
+    ?`<img src="${p.src}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`
+    :`<div class="av" style="width:100%;height:100%;background:${p.bg};color:${p.col};font-size:${f}px;font-family:'Playfair Display',serif;">${p.name[0]}</div>`;
+}
+
+/* ── PRIZE LIST ── */
+function renderPrizeList(){
+  document.getElementById('prizeList').innerHTML=prizes.map((p,i)=>`
+    <div class="prize-row${i===ap?' active-row':''}" id="pr${i}">
+      <span class="pr-arrow" onclick="selectAP(${i})">&#9654;</span>
+      <input class="pinp pinp-name" value="${p.name}" oninput="prizes[${i}].name=this.value" placeholder="獎項名稱">
+      <input class="pinp pinp-amt" value="${p.amt}" oninput="prizes[${i}].amt=this.value" placeholder="金額">
+      <span style="font-size:10px;color:#5a4a6a;">人數</span>
+      <input class="pinp pinp-q" type="number" min="1" value="${p.quota}" oninput="prizes[${i}].quota=parseInt(this.value)||1">
+      <span class="pr-won">${won(i)}已抽</span>
+      ${prizes.length>1?`<span class="pr-del" onclick="removePrize(${i})">&#10005;</span>`:''}
+    </div>`).join('');
+}
+function selectAP(i){ap=i;renderPrizeList();updateNote();}
+function applyPrize(){
+  renderPrizeList();updateNote();
+  document.getElementById('cbox').innerHTML=`<span class="idle-txt">&#9733; &nbsp; ${prizes[ap].name.toUpperCase()} &nbsp; &#9733;</span><div class="ca" id="ca"></div>`;
+}
+function addPrize(){prizes.push({name:"New Prize",amt:"NT$0",quota:1});renderPrizeList();}
+function removePrize(i){if(prizes.length<=1)return;prizes.splice(i,1);if(ap>=prizes.length)ap=prizes.length-1;renderPrizeList();updateNote();}
+function updateNote(){
+  const p=prizes[ap]||prizes[0];const w=won(ap),rem=Math.max(0,p.quota-w);
+  document.getElementById('qnote').textContent=`${p.name}  ／  剩餘名額 ${rem} / ${p.quota}`;
+  const btn=document.getElementById('dbtn');
+  if(rem<=0){btn.textContent='COMPLETED';btn.disabled=true;}
+  else{btn.textContent='DRAW';btn.disabled=false;}
+}
+
+/* ── PHOTOS ── */
+function renderStrip(){
+  document.getElementById('strip').innerHTML=photos.map(p=>`
+    <div class="thumb${drawn.has(p.id)?' drawn':''}">${av(p,40)}
+    ${!drawn.has(p.id)?`<div class="tdel" onclick="del(${p.id})">x</div>`:''}</div>`).join('');
+}
+function del(id){photos=photos.filter(p=>p.id!==id);renderStrip();updateStats();}
+function updateStats(){
+  const a=avail().length;
+  document.getElementById('sT').textContent=photos.length;
+  document.getElementById('sA').textContent=a;
+  document.getElementById('sD').textContent=drawn.size;
+}
+
+/* ── TOGGLE ── */
+function toggleMode(){
+  adminMode=!adminMode;
+  document.getElementById('admWrap').style.display=adminMode?'block':'none';
+  document.getElementById('prizeAdm').style.display=adminMode?'block':'none';
+  document.getElementById('tbtn').textContent=adminMode?'&#9654; 展示模式':'&#9632; 管理模式';
+  document.getElementById('spotL').classList.toggle('on',!adminMode);
+  document.getElementById('spotR').classList.toggle('on',!adminMode);
+}
+
+/* ── DRAW ── */
+function draw(){
+  const av2=avail();if(!av2.length||spinning)return;
+  const p=prizes[ap];if(!p)return;
+  const rem=p.quota-won(ap);if(rem<=0)return;
+  spinning=true;
+  const btn=document.getElementById('dbtn');
+  btn.disabled=true;btn.textContent='DRAWING...';
+  const box=document.getElementById('cbox');
+
+  document.getElementById('spotL').classList.add('on');
+  document.getElementById('spotR').classList.add('on');
+
+  const S=160,SP=148;
+  box.innerHTML=`
+    <div style="display:flex;flex-direction:column;align-items:center;">
+      <div class="ring-wrap" style="width:${S+30}px;height:${S+30}px;">
+        <div class="ring-glow on" style="width:${S+30}px;height:${S+30}px;box-shadow:0 0 50px 12px rgba(201,168,76,.22);"></div>
+        <div class="ring1" style="width:${S}px;height:${S}px;">
+          <div class="ring1" style="width:${S}px;height:${S}px;position:absolute;"></div>
+          <div class="rp" id="sp0" style="width:${SP}px;height:${SP}px;">${av(av2[0],SP)}</div>
+        </div>
+      </div>
+      <div class="spin-name" id="sn0">&#8212;</div>
+      <div class="spin-sub">${p.name}&nbsp;&#183;&nbsp;${p.amt}</div>
+    </div>
+    <div class="ca" id="ca"></div>`;
+
+  const iv=setInterval(()=>{
+    const r=av2[Math.floor(Math.random()*av2.length)];
+    const el=document.getElementById('sp0'),nl=document.getElementById('sn0');
+    if(el)el.innerHTML=av(r,SP);
+    if(nl)nl.textContent=r.name;
+  },80);
+
+  setTimeout(()=>{
+    clearInterval(iv);
+    const winner=av2[Math.floor(Math.random()*av2.length)];
+    drawn.add(winner.id);
+    hist.push({...winner,pi:ap,pname:p.name,pamount:p.amt});
+
+    const WS=180,WP=168;
+    box.innerHTML=`
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div class="ring-wrap" style="width:${WS+40}px;height:${WS+40}px;">
+          <div style="position:absolute;width:${WS+40}px;height:${WS+40}px;border-radius:50%;box-shadow:0 0 70px 20px rgba(201,168,76,.28);"></div>
+          <div class="w-ring" style="width:${WS}px;height:${WS}px;">
+            <div style="position:absolute;width:${WS+16}px;height:${WS+16}px;border-radius:50%;border:1px solid #6a5a3a;top:-8px;left:-8px;"></div>
+            <div style="position:absolute;width:${WS+30}px;height:${WS+30}px;border-radius:50%;border:1px solid #2a2018;top:-15px;left:-15px;"></div>
+            <div class="w-rp" style="width:${WP}px;height:${WP}px;">${av(winner,WP)}</div>
+          </div>
+        </div>
+        <div class="w-name">${winner.name}</div>
+        <div class="w-prize">${p.name}</div>
+        <div class="w-amt">${p.amt}</div>
+      </div>
+      <div class="ca" id="ca"></div>`;
+
+    confetti();
+    renderStrip();updateStats();renderPrizeList();updateNote();renderHist();
+    spinning=false;
+    const rem2=p.quota-won(ap);
+    btn.disabled=rem2<=0;
+    btn.textContent=rem2>0?'DRAW AGAIN':'COMPLETED';
+  },2800);
+}
+
+/* ── CONFETTI ── */
+function confetti(){
+  const box=document.getElementById('ca');if(!box)return;
+  const cols=['#c9a84c','#f0e0a0','#e8c870','#fff8d0','#d4a830','#b8921e'];
+  for(let i=0;i<65;i++){
+    const el=document.createElement('div');el.className='cp';
+    const c=cols[Math.floor(Math.random()*cols.length)];
+    const x=Math.random()*100,rot=Math.random()*360,w=3+Math.random()*9,h=3+Math.random()*9;
+    el.style.cssText=`left:${x}%;top:30%;width:${w}px;height:${h}px;background:${c};transform:rotate(${rot}deg);border-radius:${Math.random()>.55?'50%':'2px'};position:absolute;opacity:0;`;
+    box.appendChild(el);
+    el.animate([
+      {opacity:1,transform:`translate(0,0) rotate(${rot}deg)`},
+      {opacity:0,transform:`translate(${(Math.random()-.5)*300}px,${-(140+Math.random()*260)}px) rotate(${rot+720}deg)`}
+    ],{duration:1300+Math.random()*1000,easing:'cubic-bezier(.1,.9,.3,1)',fill:'forwards'});
+  }
+}
+
+/* ── HISTORY ── */
+function renderHist(){
+  if(!hist.length){document.getElementById('hpanel').style.display='none';return;}
+  document.getElementById('hpanel').style.display='block';
+  document.getElementById('hlist').innerHTML=[...hist].reverse().map(h=>`
+    <div class="hi">
+      <div class="hth">${h.src?`<img src="${h.src}">`:`<div class="htav" style="background:${h.bg};color:${h.col};">${h.name[0]}</div>`}</div>
+      <span class="hn">${h.name}</span><span class="hp">${h.pname}</span>
+    </div>`).join('');
+}
+
+/* ── RESET ── */
+function resetAll(){
+  if(!confirm('確定重置所有抽獎紀錄？'))return;
+  drawn=new Set();hist=[];
+  renderStrip();updateStats();renderPrizeList();updateNote();renderHist();
+  document.getElementById('cbox').innerHTML='<span class="idle-txt">&#9733; &nbsp; READY &nbsp; &#9733;</span><div class="ca" id="ca"></div>';
+  const b=document.getElementById('dbtn');b.textContent='DRAW';b.disabled=false;
+}
+
+/* ── FILE UPLOAD ── */
+document.getElementById('fi').addEventListener('change',function(e){
+  Array.from(e.target.files).forEach(f=>{
+    const r=new FileReader();
+    r.onload=ev=>{
+      photos.push({id:Date.now()+Math.random(),name:f.name.replace(/\.[^.]+$/,''),src:ev.target.result,bg:BGS[photos.length%6],col:CLS[photos.length%6]});
+      renderStrip();updateStats();
+    };r.readAsDataURL(f);
+  });this.value='';
+});
+
+/* ── STARS ── */
+function initStars(){
+  const c=document.getElementById('starCanvas');
+  c.width=window.innerWidth;c.height=window.innerHeight;
+  const ctx=c.getContext('2d');
+  for(let i=0;i<120;i++){
+    const x=Math.random()*c.width,y=Math.random()*c.height;
+    const r=Math.random()*.9+.1,a=Math.random()*.6+.1;
+    ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,240,180,${a})`;ctx.fill();
+  }
+}
+window.addEventListener('resize',initStars);
+
+/* ── INIT ── */
+initStars();
+renderPrizeList();renderStrip();updateStats();updateNote();
+setTimeout(()=>document.getElementById('mainTitle').classList.add('show'),500);
+</script>
+</body>
+</html>
