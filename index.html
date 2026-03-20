@@ -218,7 +218,7 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
     <div class="at-lines"><div class="at-line"></div><div class="at-line"></div><div class="at-line"></div></div>
     <span class="at-label">ADMIN</span>
   </div>
-  <div class="entry-ver">v2025.17</div>
+  <div class="entry-ver">v2025.18</div>
 </div>
 
 <div class="clap-flash" id="clapFlash"></div>
@@ -547,9 +547,9 @@ function applyTheme(){
   const t=S.theme||DEFAULT_THEME;const f=t.font||'Playfair Display';
   // Apply font to entire stage so ALL text inherits it
   const stageEl=document.getElementById('stage');
-  if(stageEl)stageEl.style.fontFamily=;
+  if(stageEl)stageEl.style.fontFamily=`'${f}',serif`;
   const hpanelEl=document.getElementById('hpanel');
-  if(hpanelEl)hpanelEl.style.fontFamily=;
+  if(hpanelEl)hpanelEl.style.fontFamily=`'${f}',serif`;
   const applyEl=(id,text,sz,bold,color,ff)=>{
     const el=document.getElementById(id);if(!el)return;
     el.textContent=text;
