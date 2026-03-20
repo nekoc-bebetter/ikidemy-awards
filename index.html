@@ -219,7 +219,7 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
     <span class="at-label">ADMIN</span>
   </div>
   <div id="entryLogo" style="display:none;margin-top:.5rem;"><img id="entryLogoImg" style="border-radius:8px;object-fit:contain;" src="" alt="logo"></div>
-  <div class="entry-ver" style="display:none;">v2025.25</div>
+  <div class="entry-ver" style="display:none;">v2025.26</div>
 </div>
 
 <div class="clap-flash" id="clapFlash"></div>
@@ -1050,8 +1050,6 @@ function applyLogo(t){
     }
   }
   // Entry logo — parent needs position:relative
-  const entryEl=document.getElementById('entry');
-  if(entryEl)entryEl.style.position='relative';
   posLogo(document.getElementById('entryLogo'),document.getElementById('entryLogoImg'));
   // Stage logo — parent stage already relative
   posLogo(document.getElementById('stageLogo'),document.getElementById('stageLogoImg'));
