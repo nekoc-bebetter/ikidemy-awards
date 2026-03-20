@@ -218,7 +218,7 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
     <div class="at-lines"><div class="at-line"></div><div class="at-line"></div><div class="at-line"></div></div>
     <span class="at-label">ADMIN</span>
   </div>
-  <div class="entry-ver">v2025.13</div>
+  <div class="entry-ver">v2025.14</div>
 </div>
 
 <div class="clap-flash" id="clapFlash"></div>
@@ -431,7 +431,12 @@ onValue(DB,snap=>{
     return;
   }
   if(role==='display'){
-    const prev=S.seq||0;S=Object.assign({},S,d);S.theme=mergeTheme(d.theme);
+    const prev=S.seq||0;
+    S=Object.assign({},S,d);
+    // Explicitly sync arrays so empty [] from Firebase overwrites local
+    if(d.hist!==undefined)S.hist=d.hist||[];
+    if(d.drawn!==undefined)S.drawn=d.drawn||[];
+    S.theme=mergeTheme(d.theme);
     applyTheme();renderHist();if(inc===prev)return;
     if(S.phase==='spinning'){stopSpin();showSpinUI();}
     else if(S.phase==='winner'&&S.winner){stopSpin();showWinnerUI(S.winner,S.cpname,S.cpamt);runEffect(S.cpfx,S.cpisGrand);}
