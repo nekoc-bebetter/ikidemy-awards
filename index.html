@@ -163,10 +163,14 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
 
 @keyframes swL{0%{opacity:0;transform:rotate(-35deg);}15%{opacity:1;}80%{opacity:1;}100%{opacity:0;transform:rotate(5deg);}}
 @keyframes swR{0%{opacity:0;transform:rotate(35deg);}15%{opacity:1;}80%{opacity:1;}100%{opacity:0;transform:rotate(-5deg);}}
-.sw-spot{position:absolute;top:0;transform-origin:top center;opacity:0;pointer-events:none;width:180px;height:120%;}
-.sw-spot.l{left:15%;animation:swL 4s ease-in-out forwards;}
-.sw-spot.r{right:15%;animation:swR 4s ease-in-out forwards;}
+.sw-spot{position:fixed;top:0;left:0;transform-origin:top center;opacity:0;pointer-events:none;width:200px;height:100vh;z-index:20;}
+.sw-spot.l{left:8%;animation:swL 4s ease-in-out forwards;}
+.sw-spot.r{left:auto;right:8%;animation:swR 4s ease-in-out forwards;}
 .sw-beam{width:100%;height:100%;background:linear-gradient(to bottom,rgba(255,255,200,.22) 0%,rgba(255,230,100,.08) 50%,transparent 100%);}
+.bold-btn{padding:4px 9px;border:1px solid var(--border);background:var(--pd);color:var(--gold-dim);font-size:12px;font-weight:700;cursor:pointer;border-radius:3px;flex-shrink:0;font-family:serif;transition:all .2s;}
+.bold-btn:hover{border-color:var(--gold-dim);}
+.bold-btn.on{border-color:var(--gold);color:var(--gold);background:#1e1828;}
+.color-inp{width:32px;height:28px;border:1px solid var(--border);border-radius:3px;cursor:pointer;padding:1px;background:var(--pd);flex-shrink:0;}
 #dbg{position:fixed;bottom:6px;right:8px;font-size:9px;color:#1a1228;font-family:monospace;z-index:99;pointer-events:none;text-align:right;max-width:300px;}
 </style>
 </head>
@@ -210,7 +214,11 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
   </div>
 
   <div class="clapper-hint">▶ 點擊打板，開始抽獎</div>
-  <div class="entry-ver">v2025.8</div>
+  <div class="admin-trigger" id="adminTrigger" style="position:fixed;bottom:16px;left:16px;">
+    <div class="at-lines"><div class="at-line"></div><div class="at-line"></div><div class="at-line"></div></div>
+    <span class="at-label">ADMIN</span>
+  </div>
+  <div class="entry-ver">v2025.10</div>
 </div>
 
 <div class="clap-flash" id="clapFlash"></div>
@@ -225,11 +233,6 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
   </div>
 </div>
 
-<!-- ADMIN TRIGGER -->
-<div class="admin-trigger" id="adminTrigger" style="display:none">
-  <div class="at-lines"><div class="at-line"></div><div class="at-line"></div><div class="at-line"></div></div>
-  <span class="at-label">ADMIN</span>
-</div>
 
 <!-- ADMIN -->
 <div id="admWrap" style="display:none">
@@ -262,26 +265,44 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
   <div class="theme-row">
     <span class="theme-lbl">頂部小字</span>
     <input class="theme-inp" id="inpPre" type="text" placeholder="THE IKIDEMY PRESENTS">
+    <input class="theme-inp" id="inpPreSz" type="number" min="8" max="60" placeholder="px" style="width:52px;flex:none;">
+    <button class="bold-btn" id="btnPreBold" onclick="toggleBold('Pre')">B</button>
+    <input class="color-inp" id="inpPreColor" type="color" value="#8a7a5a" title="顏色">
   </div>
   <div class="theme-row">
     <span class="theme-lbl">主標題</span>
     <input class="theme-inp" id="inpMain" type="text" placeholder="THE IKIDEMY AWARDS NIGHT">
+    <input class="theme-inp" id="inpMainSz" type="number" min="8" max="100" placeholder="px" style="width:52px;flex:none;">
+    <button class="bold-btn" id="btnMainBold" onclick="toggleBold('Main')">B</button>
+    <input class="color-inp" id="inpMainColor" type="color" value="#c9a84c" title="顏色">
   </div>
   <div class="theme-row">
     <span class="theme-lbl">副標題</span>
     <input class="theme-inp" id="inpSub" type="text" placeholder="LUCKY DRAW">
+    <input class="theme-inp" id="inpSubSz" type="number" min="8" max="60" placeholder="px" style="width:52px;flex:none;">
+    <button class="bold-btn" id="btnSubBold" onclick="toggleBold('Sub')">B</button>
+    <input class="color-inp" id="inpSubColor" type="color" value="#4a3a2a" title="顏色">
   </div>
   <div class="theme-row" style="border-top:1px solid #1a1820;padding-top:8px;margin-top:2px;">
     <span class="theme-lbl" style="color:#5a4a6a;">打板標題</span>
     <input class="theme-inp" id="inpClapTitle" type="text" placeholder="IKIDEMY AWARDS">
+    <input class="theme-inp" id="inpClapTitleSz" type="number" min="8" max="60" placeholder="px" style="width:52px;flex:none;">
+    <button class="bold-btn" id="btnClapTitleBold" onclick="toggleBold('ClapTitle')">B</button>
+    <input class="color-inp" id="inpClapTitleColor" type="color" value="#c9a84c" title="顏色">
   </div>
   <div class="theme-row">
     <span class="theme-lbl" style="color:#5a4a6a;">打板第二行</span>
     <input class="theme-inp" id="inpClapSub1" type="text" placeholder="LUCKY DRAW · 2026">
+    <input class="theme-inp" id="inpClapSub1Sz" type="number" min="8" max="40" placeholder="px" style="width:52px;flex:none;">
+    <button class="bold-btn" id="btnClapSub1Bold" onclick="toggleBold('ClapSub1')">B</button>
+    <input class="color-inp" id="inpClapSub1Color" type="color" value="#888888" title="顏色">
   </div>
   <div class="theme-row">
     <span class="theme-lbl" style="color:#5a4a6a;">打板第三行</span>
     <input class="theme-inp" id="inpClapSub2" type="text" placeholder="SCENE 1 · TAKE 1">
+    <input class="theme-inp" id="inpClapSub2Sz" type="number" min="8" max="40" placeholder="px" style="width:52px;flex:none;">
+    <button class="bold-btn" id="btnClapSub2Bold" onclick="toggleBold('ClapSub2')">B</button>
+    <input class="color-inp" id="inpClapSub2Color" type="color" value="#888888" title="顏色">
   </div>
   <div class="theme-row">
     <span class="theme-lbl">字型</span>
@@ -357,7 +378,13 @@ const FONTS=[
 const DEFAULT_THEME={
   pre:'THE IKIDEMY PRESENTS',main:'THE IKIDEMY AWARDS NIGHT',sub:'LUCKY DRAW',
   font:'Playfair Display',
-  clapTitle:'IKIDEMY AWARDS',clapSub1:'LUCKY DRAW · 2026',clapSub2:'SCENE 1 · TAKE 1'
+  preSz:10,mainSz:24,subSz:11,
+  preBold:false,mainBold:false,subBold:false,
+  preColor:'#8a7a5a',mainColor:'#c9a84c',subColor:'#4a3a2a',
+  clapTitle:'IKIDEMY AWARDS',clapSub1:'LUCKY DRAW · 2026',clapSub2:'SCENE 1 · TAKE 1',
+  clapTitleSz:13,clapSub1Sz:9,clapSub2Sz:9,
+  clapTitleBold:false,clapSub1Bold:false,clapSub2Bold:false,
+  clapTitleColor:'#c9a84c',clapSub1Color:'#888888',clapSub2Color:'#888888'
 };
 
 let role=null,spinIv=null,lastPushedSeq=-1,firstRead=true;
@@ -418,11 +445,33 @@ function applyClapperText(){
   document.getElementById('entryPre').textContent=t.pre||DEFAULT_THEME.pre;
   document.getElementById('entryMain').textContent=t.main||DEFAULT_THEME.main;
   document.getElementById('entrySub').textContent=t.sub||DEFAULT_THEME.sub;
-  document.getElementById('clapTitle').textContent=t.clapTitle||DEFAULT_THEME.clapTitle;
-  document.getElementById('clapSub').innerHTML=(t.clapSub1||DEFAULT_THEME.clapSub1)+'<br>'+(t.clapSub2||DEFAULT_THEME.clapSub2);
   const f=t.font||'Playfair Display';
-  document.getElementById('entryMain').style.fontFamily=`'${f}',serif`;
-  document.getElementById('clapTitle').style.fontFamily=`'${f}',serif`;
+  const ct=document.getElementById('clapTitle');
+  if(ct){
+    ct.textContent=t.clapTitle||DEFAULT_THEME.clapTitle;
+    ct.style.fontSize=(t.clapTitleSz||DEFAULT_THEME.clapTitleSz)+'px';
+    ct.style.fontWeight=t.clapTitleBold?'700':'400';
+    ct.style.color=t.clapTitleColor||DEFAULT_THEME.clapTitleColor;
+    ct.style.fontFamily=`'${f}',serif`;
+  }
+  const cs=document.getElementById('clapSub');
+  if(cs){
+    cs.innerHTML=(t.clapSub1||DEFAULT_THEME.clapSub1)+'<br>'+(t.clapSub2||DEFAULT_THEME.clapSub2);
+    cs.style.fontSize=(t.clapSub1Sz||DEFAULT_THEME.clapSub1Sz)+'px';
+    cs.style.fontWeight=t.clapSub1Bold?'700':'400';
+    cs.style.color=t.clapSub1Color||DEFAULT_THEME.clapSub1Color;
+  }
+  const em=document.getElementById('entryMain');
+  if(em){
+    em.style.fontFamily=`'${f}',serif`;
+    em.style.fontSize=(t.mainSz||DEFAULT_THEME.mainSz)+'px';
+    em.style.fontWeight=t.mainBold?'700':'400';
+    em.style.color=t.mainColor||DEFAULT_THEME.mainColor;
+  }
+  const ep=document.getElementById('entryPre');
+  if(ep){ep.style.color=t.preColor||DEFAULT_THEME.preColor;}
+  const es=document.getElementById('entrySub');
+  if(es){es.style.color=t.subColor||DEFAULT_THEME.subColor;}
 }
 
 // ── CLAPPER INTERACTION ──
@@ -482,21 +531,28 @@ function isDisp(){return role==='display';}
 // ── THEME ──
 function applyTheme(){
   const t=S.theme||DEFAULT_THEME;const f=t.font||'Playfair Display';
-  document.getElementById('preTitle').textContent=t.pre||DEFAULT_THEME.pre;
-  document.getElementById('preTitle').style.fontFamily=`'${f}',serif`;
-  document.getElementById('mainTitle').textContent=t.main||DEFAULT_THEME.main;
-  document.getElementById('mainTitle').style.fontFamily=`'${f}',serif`;
-  document.getElementById('subTitle').textContent=t.sub||DEFAULT_THEME.sub;
-  document.getElementById('subTitle').style.fontFamily=`'${f}',serif`;
+  const applyEl=(id,text,sz,bold,color,ff)=>{
+    const el=document.getElementById(id);if(!el)return;
+    el.textContent=text;
+    el.style.fontFamily=`'${ff||f}',serif`;
+    el.style.fontSize=sz+'px';
+    el.style.fontWeight=bold?'700':'400';
+    el.style.color=color;
+  };
+  applyEl('preTitle',t.pre||DEFAULT_THEME.pre,t.preSz||DEFAULT_THEME.preSz,t.preBold,t.preColor||DEFAULT_THEME.preColor);
+  applyEl('mainTitle',t.main||DEFAULT_THEME.main,t.mainSz||DEFAULT_THEME.mainSz,t.mainBold,t.mainColor||DEFAULT_THEME.mainColor);
+  applyEl('subTitle',t.sub||DEFAULT_THEME.sub,t.subSz||DEFAULT_THEME.subSz,t.subBold,t.subColor||DEFAULT_THEME.subColor);
   document.querySelectorAll('.font-btn').forEach(btn=>btn.classList.toggle('active',btn.dataset.font===f));
   applyClapperText();
   if(role==='admin'){
-    document.getElementById('inpPre').value=t.pre||DEFAULT_THEME.pre;
-    document.getElementById('inpMain').value=t.main||DEFAULT_THEME.main;
-    document.getElementById('inpSub').value=t.sub||DEFAULT_THEME.sub;
-    document.getElementById('inpClapTitle').value=t.clapTitle||DEFAULT_THEME.clapTitle;
-    document.getElementById('inpClapSub1').value=t.clapSub1||DEFAULT_THEME.clapSub1;
-    document.getElementById('inpClapSub2').value=t.clapSub2||DEFAULT_THEME.clapSub2;
+    const setRow=(key,defKey)=>{
+      const K=key.charAt(0).toUpperCase()+key.slice(1);
+      const ti=document.getElementById('inp'+K);if(ti)ti.value=t[key]||DEFAULT_THEME[key]||'';
+      const si=document.getElementById('inp'+K+'Sz');if(si)si.value=t[key+'Sz']||DEFAULT_THEME[key+'Sz']||12;
+      const bi=document.getElementById('btn'+K+'Bold');if(bi){bi.classList.toggle('on',!!t[key+'Bold']);}
+      const ci=document.getElementById('inp'+K+'Color');if(ci)ci.value=t[key+'Color']||DEFAULT_THEME[key+'Color']||'#c9a84c';
+    };
+    ['pre','main','sub','clapTitle','clapSub1','clapSub2'].forEach(k=>setRow(k));
   }
 }
 function buildFontBtns(){
@@ -521,7 +577,7 @@ function enterMode(m){
     document.body.classList.add('display-mode');
     ['admWrap','prizeAdm','themeAdm','drawArea'].forEach(id=>document.getElementById(id).style.display='none');
     document.getElementById('dispBadge').style.display='block';
-    document.getElementById('adminTrigger').style.display='flex';
+    document.getElementById('adminTrigger').style.display='none';
     if(S.phase==='winner'&&S.winner)showWinnerUI(S.winner,S.cpname,S.cpamt);
     else if(S.phase==='spinning')showSpinUI();
     else setIdle();
@@ -622,14 +678,23 @@ document.getElementById('resetBtn').addEventListener('click',()=>{
   document.getElementById('dbtn').textContent='DRAW';document.getElementById('dbtn').disabled=false;
 });
 document.getElementById('themeApplyBtn').addEventListener('click',()=>{
-  S.theme=Object.assign({},S.theme||{},{
-    pre:document.getElementById('inpPre').value.trim()||DEFAULT_THEME.pre,
-    main:document.getElementById('inpMain').value.trim()||DEFAULT_THEME.main,
-    sub:document.getElementById('inpSub').value.trim()||DEFAULT_THEME.sub,
-    clapTitle:document.getElementById('inpClapTitle').value.trim()||DEFAULT_THEME.clapTitle,
-    clapSub1:document.getElementById('inpClapSub1').value.trim()||DEFAULT_THEME.clapSub1,
-    clapSub2:document.getElementById('inpClapSub2').value.trim()||DEFAULT_THEME.clapSub2,
-  });
+  const getRow=key=>{
+    const K=key.charAt(0).toUpperCase()+key.slice(1);
+    const ti=document.getElementById('inp'+K);
+    const si=document.getElementById('inp'+K+'Sz');
+    const bi=document.getElementById('btn'+K+'Bold');
+    const ci=document.getElementById('inp'+K+'Color');
+    return{
+      [key]:(ti?ti.value.trim():'')||DEFAULT_THEME[key],
+      [key+'Sz']:parseInt(si?si.value:0)||DEFAULT_THEME[key+'Sz'],
+      [key+'Bold']:bi?bi.classList.contains('on'):false,
+      [key+'Color']:ci?ci.value:DEFAULT_THEME[key+'Color'],
+    };
+  };
+  S.theme=Object.assign({},S.theme||{},
+    getRow('pre'),getRow('main'),getRow('sub'),
+    getRow('clapTitle'),getRow('clapSub1'),getRow('clapSub2')
+  );
   S.seq=(S.seq||0)+1;pushState();applyTheme();
 });
 document.getElementById('dbtn').addEventListener('click',doDraw);
@@ -762,6 +827,11 @@ function fxLightning(m=1){
 }
 
 // ── DRAW ──
+function toggleBold(key){
+  const btn=document.getElementById('btn'+key+'Bold');
+  if(!btn)return;
+  btn.classList.toggle('on');
+}
 function doDraw(){
   if(role!=='admin')return;
   const av2=avail();if(!av2.length||S.phase==='spinning')return;
