@@ -218,7 +218,7 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
     <div class="at-lines"><div class="at-line"></div><div class="at-line"></div><div class="at-line"></div></div>
     <span class="at-label">ADMIN</span>
   </div>
-  <div class="entry-ver">v2025.15</div>
+  <div class="entry-ver">v2025.16</div>
 </div>
 
 <div class="clap-flash" id="clapFlash"></div>
@@ -388,6 +388,14 @@ const DEFAULT_THEME={
 };
 
 let role=null,spinIv=null,lastPushedSeq=-1,firstRead=true;
+// Timeout fallback - if Firebase doesn't respond in 5s, show entry anyway
+const loadTimeout=setTimeout(()=>{
+  if(firstRead){
+    firstRead=false;
+    document.getElementById('loading').style.display='none';
+    document.getElementById('entry').style.display='flex';
+  }
+},5000);
 let S={
   prizes:[
     {name:"Grand Prize",amt:"NT$30,000",quota:1,fx:"colorful"},
@@ -415,6 +423,7 @@ onValue(DB,snap=>{
   log('recv seq='+(d?d.seq:'null')+' phase='+(d?d.phase:'?'));
   if(firstRead){
     firstRead=false;
+    clearTimeout(loadTimeout);
     if(d){S=Object.assign({},S,d);S.theme=mergeTheme(d.theme);lastPushedSeq=S.seq;}
     document.getElementById('loading').style.display='none';
     document.getElementById('entry').style.display='flex';
@@ -442,7 +451,7 @@ onValue(DB,snap=>{
     else if(S.phase==='winner'&&S.winner){stopSpin();showWinnerUI(S.winner,S.cpname,S.cpamt);runEffect(S.cpfx,S.cpisGrand);}
     else if(S.phase==='idle'){stopSpin();setIdle();}
   }
-},e=>{syncOk(false);if(firstRead){firstRead=false;document.getElementById('loading').style.display='none';document.getElementById('entry').style.display='flex';}});
+},e=>{syncOk(false);if(firstRead){firstRead=false;clearTimeout(loadTimeout);document.getElementById('loading').style.display='none';document.getElementById('entry').style.display='flex';}});
 
 // ── CLAPPER TEXT ──
 function applyClapperText(){
