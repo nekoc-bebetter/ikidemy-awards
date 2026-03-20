@@ -213,12 +213,12 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
     </div>
   </div>
 
-  <div class="clapper-hint">▶ 點擊打板，開始抽獎</div>
+  <div class="clapper-hint">CLICK TO START</div>
   <div class="admin-trigger" id="adminTrigger" style="position:fixed;bottom:16px;left:16px;">
     <div class="at-lines"><div class="at-line"></div><div class="at-line"></div><div class="at-line"></div></div>
     <span class="at-label">ADMIN</span>
   </div>
-  <div class="entry-ver">v2025.11</div>
+  <div class="entry-ver">v2025.12</div>
 </div>
 
 <div class="clap-flash" id="clapFlash"></div>
@@ -338,7 +338,7 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
     <button class="dbtn" id="dbtn">DRAW</button>
     <div class="qnote" id="qnote"></div>
   </div>
-  <div class="dispBadge" id="dispBadge" style="display:none">&#9675; DISPLAY MODE</div>
+  <div class="dispBadge" id="dispBadge" style="display:none"></div>
 </div>
 
 <div id="hpanel" style="display:none">
@@ -537,7 +537,7 @@ function applyTheme(){
     el.style.fontFamily=`'${ff||f}',serif`;
     el.style.fontSize=sz+'px';
     el.style.fontWeight=bold?'700':'400';
-    el.style.color=color;
+    el.style.color=color||'inherit';
   };
   applyEl('preTitle',t.pre||DEFAULT_THEME.pre,t.preSz||DEFAULT_THEME.preSz,t.preBold,t.preColor||DEFAULT_THEME.preColor);
   applyEl('mainTitle',t.main||DEFAULT_THEME.main,t.mainSz||DEFAULT_THEME.mainSz,t.mainBold,t.mainColor||DEFAULT_THEME.mainColor);
@@ -834,6 +834,7 @@ function toggleBold(key){
   if(!btn)return;
   btn.classList.toggle('on');
 }
+window.toggleBold=toggleBold;
 function doDraw(){
   if(role!=='admin')return;
   const av2=avail();if(!av2.length||S.phase==='spinning')return;
