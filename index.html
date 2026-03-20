@@ -218,7 +218,7 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
     <div class="at-lines"><div class="at-line"></div><div class="at-line"></div><div class="at-line"></div></div>
     <span class="at-label">ADMIN</span>
   </div>
-  <div class="entry-ver">v2025.12</div>
+  <div class="entry-ver">v2025.13</div>
 </div>
 
 <div class="clap-flash" id="clapFlash"></div>
@@ -889,7 +889,7 @@ document.getElementById('fi').addEventListener('change',function(e){
   const files=Array.from(e.target.files);let done=0;
   files.forEach(f=>{
     compressImage(f).then(src=>{
-      (S.photos=S.photos||[]).push({id:Date.now()+Math.random(),name:f.name.replace(/\.[^.]+$/,''),src,bg:BGS[S.photos.length%6],col:CLS[S.photos.length%6]});
+      (S.photos=S.photos||[]).push({id:Date.now()+Math.random(),name:f.name.replace(/\.[^.]+$/,'').toUpperCase(),src,bg:BGS[S.photos.length%6],col:CLS[S.photos.length%6]});
       done++;renderStrip();updateStats();
       if(done===files.length){S.seq=(S.seq||0)+1;pushState();}
     });
