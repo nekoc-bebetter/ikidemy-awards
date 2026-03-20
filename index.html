@@ -218,7 +218,7 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
     <div class="at-lines"><div class="at-line"></div><div class="at-line"></div><div class="at-line"></div></div>
     <span class="at-label">ADMIN</span>
   </div>
-  <div class="entry-ver">v2025.14</div>
+  <div class="entry-ver">v2025.15</div>
 </div>
 
 <div class="clap-flash" id="clapFlash"></div>
@@ -536,6 +536,11 @@ function isDisp(){return role==='display';}
 // ── THEME ──
 function applyTheme(){
   const t=S.theme||DEFAULT_THEME;const f=t.font||'Playfair Display';
+  // Apply font to entire stage so ALL text inherits it
+  const stageEl=document.getElementById('stage');
+  if(stageEl)stageEl.style.fontFamily=;
+  const hpanelEl=document.getElementById('hpanel');
+  if(hpanelEl)hpanelEl.style.fontFamily=;
   const applyEl=(id,text,sz,bold,color,ff)=>{
     const el=document.getElementById(id);if(!el)return;
     el.textContent=text;
@@ -737,7 +742,7 @@ function showWinnerUI(w,pname,pamt){
       <div class="wAmt" style="font-family:'${f}',serif;">${pamt}</div>
     </div><div class="ca" id="ca"></div>`;
 }
-function setIdle(){document.getElementById('cbox').innerHTML='<span class="idleTxt">&#9733; &nbsp; READY &nbsp; &#9733;</span><div class="ca" id="ca"></div>';}
+function setIdle(){const f=fontName();document.getElementById('cbox').innerHTML=`<span class="idleTxt" style="font-family:'${f}',serif;">&#9733; &nbsp; READY &nbsp; &#9733;</span><div class="ca" id="ca"></div>`;}
 
 // ── EFFECTS ──
 function runEffect(fx,isGrand){
