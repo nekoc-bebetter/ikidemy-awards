@@ -218,7 +218,7 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
     <div class="at-lines"><div class="at-line"></div><div class="at-line"></div><div class="at-line"></div></div>
     <span class="at-label">ADMIN</span>
   </div>
-  <div class="entry-ver">v2025.21</div>
+  <div class="entry-ver">v2025.22</div>
 </div>
 
 <div class="clap-flash" id="clapFlash"></div>
@@ -727,9 +727,9 @@ function showSpinUI(){
       <div class="spinSub" style="font-family:'${f}',serif;">${S.cpname}&nbsp;&#183;&nbsp;${S.cpamt}</div>
     </div><div class="ca" id="ca"></div>`;
   stopSpin();
-  let spinDelay=60;
+  let spinDelay=70;
   const spinStart=Date.now();
-  const SPIN_TOTAL=2800;
+  const SPIN_TOTAL=5000;
   function scheduleSpin(){
     spinIv=setTimeout(()=>{
       const elapsed=Date.now()-spinStart;
@@ -738,10 +738,11 @@ function showSpinUI(){
       const ph=document.getElementById('spinPhoto'),lb=document.getElementById('spinLabel');
       if(ph)ph.innerHTML=mkAv(r,inner-12);if(lb)lb.textContent=r.name;
       const p=elapsed/SPIN_TOTAL;
-      if(p<0.55){spinDelay=60;}
-      else if(p<0.75){spinDelay=60+((p-0.55)/0.2)*140;}
-      else if(p<0.9){spinDelay=200+((p-0.75)/0.15)*300;}
-      else{spinDelay=500+((p-0.9)/0.1)*600;}
+      if(p<0.45){spinDelay=70;}
+      else if(p<0.65){spinDelay=70+((p-0.45)/0.2)*180;}
+      else if(p<0.82){spinDelay=250+((p-0.65)/0.17)*450;}
+      else if(p<0.93){spinDelay=700+((p-0.82)/0.11)*800;}
+      else{spinDelay=1500+((p-0.93)/0.07)*1000;}
       scheduleSpin();
     },Math.round(spinDelay));
   }
@@ -883,7 +884,7 @@ function doDraw(){
     const rem2=p.quota-won(S.ap);
     document.getElementById('dbtn').disabled=rem2<=0;
     document.getElementById('dbtn').textContent=rem2>0?'DRAW AGAIN':'COMPLETED';
-  },2800);
+  },5000);
 }
 
 // ── HISTORY ──
