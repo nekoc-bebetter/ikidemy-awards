@@ -218,7 +218,7 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
     <div class="at-lines"><div class="at-line"></div><div class="at-line"></div><div class="at-line"></div></div>
     <span class="at-label">ADMIN</span>
   </div>
-  <div class="entry-ver">v2025.20</div>
+  <div class="entry-ver">v2025.21</div>
 </div>
 
 <div class="clap-flash" id="clapFlash"></div>
@@ -727,13 +727,27 @@ function showSpinUI(){
       <div class="spinSub" style="font-family:'${f}',serif;">${S.cpname}&nbsp;&#183;&nbsp;${S.cpamt}</div>
     </div><div class="ca" id="ca"></div>`;
   stopSpin();
-  spinIv=setInterval(()=>{
-    const r=all[Math.floor(Math.random()*all.length)];
-    const ph=document.getElementById('spinPhoto'),lb=document.getElementById('spinLabel');
-    if(ph)ph.innerHTML=mkAv(r,inner-12);if(lb)lb.textContent=r.name;
-  },85);
+  let spinDelay=60;
+  const spinStart=Date.now();
+  const SPIN_TOTAL=2800;
+  function scheduleSpin(){
+    spinIv=setTimeout(()=>{
+      const elapsed=Date.now()-spinStart;
+      if(elapsed>=SPIN_TOTAL)return;
+      const r=all[Math.floor(Math.random()*all.length)];
+      const ph=document.getElementById('spinPhoto'),lb=document.getElementById('spinLabel');
+      if(ph)ph.innerHTML=mkAv(r,inner-12);if(lb)lb.textContent=r.name;
+      const p=elapsed/SPIN_TOTAL;
+      if(p<0.55){spinDelay=60;}
+      else if(p<0.75){spinDelay=60+((p-0.55)/0.2)*140;}
+      else if(p<0.9){spinDelay=200+((p-0.75)/0.15)*300;}
+      else{spinDelay=500+((p-0.9)/0.1)*600;}
+      scheduleSpin();
+    },Math.round(spinDelay));
+  }
+  scheduleSpin();
 }
-function stopSpin(){if(spinIv){clearInterval(spinIv);spinIv=null;}}
+function stopSpin(){if(spinIv){clearTimeout(spinIv);spinIv=null;}}
 function showWinnerUI(w,pname,pamt){
   if(!w)return;
   const outer=isDisp()?320:220,inner=isDisp()?270:180,glow=isDisp()?100:70;const f=fontName();
