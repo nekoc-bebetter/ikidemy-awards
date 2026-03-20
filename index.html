@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Ikidemy Awards Night — Lucky Draw</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Manrope:wght@300;400;500&family=Cinzel:wght@400;700&family=Josefin+Sans:wght@300;400&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Manrope:wght@300;400;500&family=Cinzel:wght@400;700&family=Josefin+Sans:wght@300;400&family=EB+Garamond:ital,wght@0,400;1,400&family=Bebas+Neue&family=Montserrat:wght@300;400;500&family=Italiana&family=Libre+Baskerville:wght@400;700&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{--gold:#c9a84c;--gold-light:#e8d5a3;--gold-dim:#7a6a4a;--bg:#07060a;--bg2:#0d0b10;--bg3:#0a0910;--border:#2a2230;--pd:#16101e;--pm:#3a2e4a;}
@@ -213,12 +213,13 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
     </div>
   </div>
 
-  <div class="clapper-hint">CLICK TO START</div>
+  <div class="clapper-hint" id="clapHint">CLICK TO START</div>
   <div class="admin-trigger" id="adminTrigger" style="position:fixed;bottom:16px;left:16px;">
     <div class="at-lines"><div class="at-line"></div><div class="at-line"></div><div class="at-line"></div></div>
     <span class="at-label">ADMIN</span>
   </div>
-  <div class="entry-ver">v2025.22</div>
+  <div id="entryLogo" style="display:none;margin-top:.5rem;"><img id="entryLogoImg" style="border-radius:8px;object-fit:contain;" src="" alt="logo"></div>
+  <div class="entry-ver" style="display:none;">v2025.25</div>
 </div>
 
 <div class="clap-flash" id="clapFlash"></div>
@@ -308,6 +309,30 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
     <span class="theme-lbl">字型</span>
     <div style="display:flex;gap:6px;flex-wrap:wrap;" id="fontBtns"></div>
   </div>
+  <div class="theme-row" style="border-top:1px solid #1a1820;padding-top:8px;margin-top:2px;">
+    <span class="theme-lbl">開始按鈕</span>
+    <input class="theme-inp" id="inpHint" type="text" placeholder="CLICK TO START">
+    <input class="theme-inp" id="inpHintSz" type="number" min="8" max="40" placeholder="px" style="width:52px;flex:none;">
+    <button class="bold-btn" id="btnHintBold" onclick="toggleBold('Hint')">B</button>
+    <input class="color-inp" id="inpHintColor" type="color" value="#4a3a2a" title="顏色">
+  </div>
+  <div class="theme-row" style="border-top:1px solid #1a1820;padding-top:8px;margin-top:2px;">
+    <span class="theme-lbl">公司 Logo</span>
+    <button class="ubtn" id="logoUploadBtn">上傳 Logo</button>
+    <input type="file" id="logoFile" accept="image/*" style="display:none">
+    <span style="font-size:11px;color:#5a4a6a;">大小</span>
+    <input class="theme-inp" id="inpLogoSize" type="number" min="20" max="500" placeholder="px" style="width:60px;flex:none;" value="120">
+    <button class="ubtn" id="logoRemoveBtn" style="border-color:#5a2a2a;color:#8a4a4a;">移除</button>
+  </div>
+  <div class="theme-row" id="logoPosRow" style="display:none;">
+    <span class="theme-lbl">位置 X</span>
+    <input type="range" id="inpLogoX" min="0" max="100" value="50" style="flex:1;">
+    <span style="font-size:11px;color:#5a4a6a;width:30px;" id="logoXVal">50%</span>
+    <span style="font-size:11px;color:#5a4a6a;margin-left:8px;">Y</span>
+    <input type="range" id="inpLogoY" min="0" max="100" value="10" style="flex:1;">
+    <span style="font-size:11px;color:#5a4a6a;width:30px;" id="logoYVal">10%</span>
+  </div>
+  <div id="logoPreview" style="display:none;padding:4px 0;"><img id="logoPreviewImg" style="height:40px;border-radius:4px;object-fit:contain;" src="" alt=""></div>
   <div class="adm-btns">
     <button class="ubtn" id="themeApplyBtn" style="border-color:var(--gold);">套用主題 &#9654;</button>
   </div>
@@ -322,6 +347,7 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
 </div>
 
 <div id="stage" style="display:none">
+  <div id="stageLogo" style="display:none;margin-bottom:.8rem;"><img id="stageLogoImg" style="border-radius:8px;object-fit:contain;" src="" alt="logo"></div>
   <div class="filmStrip">
     <div class="fhs"><div class="fh"></div><div class="fh"></div><div class="fh"></div></div>
     <div class="fln"></div>
@@ -374,6 +400,9 @@ const FONTS=[
   {k:'Playfair Display',label:'Playfair'},{k:'Cormorant Garamond',label:'Cormorant'},
   {k:'Cinzel',label:'Cinzel'},{k:'Josefin Sans',label:'Josefin'},
   {k:'EB Garamond',label:'EB Garamond'},{k:'Manrope',label:'Manrope'},
+  {k:'Bebas Neue',label:'Bebas Neue'},{k:'Montserrat',label:'Montserrat'},
+  {k:'Italiana',label:'Italiana'},{k:'Libre Baskerville',label:'Baskerville'},
+  {k:'Raleway',label:'Raleway'},
 ];
 const DEFAULT_THEME={
   pre:'THE IKIDEMY PRESENTS',main:'THE IKIDEMY AWARDS NIGHT',sub:'LUCKY DRAW',
@@ -384,7 +413,9 @@ const DEFAULT_THEME={
   clapTitle:'IKIDEMY AWARDS',clapSub1:'LUCKY DRAW · 2026',clapSub2:'SCENE 1 · TAKE 1',
   clapTitleSz:13,clapSub1Sz:9,clapSub2Sz:9,
   clapTitleBold:false,clapSub1Bold:false,clapSub2Bold:false,
-  clapTitleColor:'#c9a84c',clapSub1Color:'#888888',clapSub2Color:'#888888'
+  clapTitleColor:'#c9a84c',clapSub1Color:'#888888',clapSub2Color:'#888888',
+  hint:'CLICK TO START',hintSz:11,hintBold:false,hintColor:'#4a3a2a',
+  logoData:null,logoSize:120,logoX:50,logoY:10
 };
 
 let role=null,spinIv=null,lastPushedSeq=-1,firstRead=true;
@@ -480,6 +511,16 @@ function applyClapperText(){
     cs.style.fontFamily=`'${f}',serif`;
   }
 
+
+  const ch=document.getElementById('clapHint');
+  if(ch){
+    ch.textContent=t.hint||DEFAULT_THEME.hint;
+    ch.style.fontFamily=`'${f}',serif`;
+    ch.style.fontSize=(t.hintSz||DEFAULT_THEME.hintSz)+'px';
+    ch.style.fontWeight=t.hintBold?'700':'400';
+    ch.style.color=t.hintColor||DEFAULT_THEME.hintColor;
+  }
+  applyLogo(t);
 }
 
 // ── CLAPPER INTERACTION ──
@@ -488,13 +529,26 @@ const clapFlash=document.getElementById('clapFlash');
 let clapDone=false;
 document.getElementById('clapper').addEventListener('click',()=>{
   if(clapDone)return;clapDone=true;
+  // Arm swings down slowly
+  clapArm.style.transition='transform 0.18s ease-in';
   clapArm.style.transform='rotate(-52deg)';
   setTimeout(()=>{
+    // Arm snaps back
+    clapArm.style.transition='transform 0.12s ease-out';
     clapArm.style.transform='rotate(0deg)';
-    clapFlash.style.transition='opacity 0.04s';clapFlash.style.opacity='0.9';
-    setTimeout(()=>{clapFlash.style.transition='opacity 0.45s';clapFlash.style.opacity='0';},65);
-    setTimeout(()=>{document.getElementById('entry').style.display='none';enterMode('display');},300);
-  },85);
+    // Flash
+    clapFlash.style.transition='opacity 0.06s';
+    clapFlash.style.opacity='0.95';
+    setTimeout(()=>{
+      clapFlash.style.transition='opacity 0.8s ease-out';
+      clapFlash.style.opacity='0';
+    },120);
+    // Enter display after flash fades
+    setTimeout(()=>{
+      document.getElementById('entry').style.display='none';
+      enterMode('display');
+    },900);
+  },220);
 });
 
 // ── PASSWORD ──
@@ -557,6 +611,7 @@ function applyTheme(){
   applyEl('subTitle',t.sub||DEFAULT_THEME.sub,t.subSz||DEFAULT_THEME.subSz,t.subBold,t.subColor||DEFAULT_THEME.subColor);
   document.querySelectorAll('.font-btn').forEach(btn=>btn.classList.toggle('active',btn.dataset.font===f));
   applyClapperText();
+  applyLogo(t);
   if(role==='admin'){
     const setRow=(key,defKey)=>{
       const K=key.charAt(0).toUpperCase()+key.slice(1);
@@ -566,6 +621,10 @@ function applyTheme(){
       const ci=document.getElementById('inp'+K+'Color');if(ci)ci.value=t[key+'Color']||DEFAULT_THEME[key+'Color']||'#c9a84c';
     };
     ['pre','main','sub','clapTitle','clapSub1','clapSub2'].forEach(k=>setRow(k));
+    const hi=document.getElementById('inpHint');if(hi)hi.value=t.hint||DEFAULT_THEME.hint;
+    const hsi=document.getElementById('inpHintSz');if(hsi)hsi.value=t.hintSz||DEFAULT_THEME.hintSz;
+    const hbi=document.getElementById('btnHintBold');if(hbi)hbi.classList.toggle('on',!!t.hintBold);
+    const hci=document.getElementById('inpHintColor');if(hci)hci.value=t.hintColor||DEFAULT_THEME.hintColor;
   }
 }
 function buildFontBtns(){
@@ -706,14 +765,52 @@ document.getElementById('themeApplyBtn').addEventListener('click',()=>{
       [key+'Color']:ci?ci.value:DEFAULT_THEME[key+'Color'],
     };
   };
+  const hintEl=document.getElementById('inpHint');
+  const hintSzEl=document.getElementById('inpHintSz');
+  const hintBoldEl=document.getElementById('btnHintBold');
+  const hintColorEl=document.getElementById('inpHintColor');
+  const logoSzEl=document.getElementById('inpLogoSize');
   S.theme=Object.assign({},S.theme||{},
     getRow('pre'),getRow('main'),getRow('sub'),
-    getRow('clapTitle'),getRow('clapSub1'),getRow('clapSub2')
+    getRow('clapTitle'),getRow('clapSub1'),getRow('clapSub2'),
+    {
+      hint:hintEl?hintEl.value.trim()||DEFAULT_THEME.hint:DEFAULT_THEME.hint,
+      hintSz:parseInt(hintSzEl?hintSzEl.value:0)||DEFAULT_THEME.hintSz,
+      hintBold:hintBoldEl?hintBoldEl.classList.contains('on'):false,
+      hintColor:hintColorEl?hintColorEl.value:DEFAULT_THEME.hintColor,
+      logoSize:parseInt(logoSzEl?logoSzEl.value:0)||DEFAULT_THEME.logoSize,
+      logoX:parseInt(document.getElementById('inpLogoX')?document.getElementById('inpLogoX').value:50)||50,
+      logoY:parseInt(document.getElementById('inpLogoY')?document.getElementById('inpLogoY').value:10)||10,
+    }
   );
   S.seq=(S.seq||0)+1;pushState();applyTheme();
 });
 document.getElementById('dbtn').addEventListener('click',doDraw);
 document.getElementById('uploadBtn').addEventListener('click',()=>document.getElementById('fi').click());
+document.getElementById('logoUploadBtn').addEventListener('click',()=>document.getElementById('logoFile').click());
+document.getElementById('logoFile').addEventListener('change',function(e){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    S.theme=Object.assign({},S.theme||{},{logoData:ev.target.result});
+    applyLogo(S.theme);
+  };
+  r.readAsDataURL(f);this.value='';
+});
+document.getElementById('logoRemoveBtn').addEventListener('click',()=>{
+  S.theme=Object.assign({},S.theme||{},{logoData:null});
+  applyLogo(S.theme);
+});
+document.getElementById('inpLogoX').addEventListener('input',function(){
+  document.getElementById('logoXVal').textContent=this.value+'%';
+  S.theme=Object.assign({},S.theme||{},{logoX:parseInt(this.value)});
+  applyLogo(S.theme);
+});
+document.getElementById('inpLogoY').addEventListener('input',function(){
+  document.getElementById('logoYVal').textContent=this.value+'%';
+  S.theme=Object.assign({},S.theme||{},{logoY:parseInt(this.value)});
+  applyLogo(S.theme);
+});
 
 // ── STAGE UI ──
 function showSpinUI(){
@@ -760,7 +857,7 @@ function showWinnerUI(w,pname,pamt){
       <div class="wAmt" style="font-family:'${f}',serif;">${pamt}</div>
     </div><div class="ca" id="ca"></div>`;
 }
-function setIdle(){const f=fontName();document.getElementById('cbox').innerHTML=`<span class="idleTxt" style="font-family:'${f}',serif;">&#9733; &nbsp; READY &nbsp; &#9733;</span><div class="ca" id="ca"></div>`;}
+function setIdle(){const f=fontName();document.getElementById('cbox').innerHTML=`<span class="idleTxt" style="font-family:'${f}',serif;">&#9733; &nbsp; READY &nbsp; &#9733;</span><div class="ca" id="ca"></div>`;const slEl=document.getElementById('stageLogo');if(slEl){slEl.style.transition='opacity 1s';slEl.style.opacity='1';}}
 
 // ── EFFECTS ──
 function runEffect(fx,isGrand){
@@ -873,6 +970,9 @@ function doDraw(){
   S.phase='spinning';S.cpname=p.name;S.cpamt=p.amt;S.cpfx=p.fx||'colorful';S.cpisGrand=isGrand;S.winner=null;
   S.seq=(S.seq||0)+1;
   document.getElementById('dbtn').disabled=true;document.getElementById('dbtn').textContent='DRAWING...';
+  // Fade out logo when draw starts
+  const slEl=document.getElementById('stageLogo');
+  if(slEl){slEl.style.transition='opacity 1s';slEl.style.opacity='0';}
   showSpinUI();pushState();
   setTimeout(()=>{
     stopSpin();
@@ -923,6 +1023,50 @@ document.getElementById('fi').addEventListener('change',function(e){
     });
   });this.value='';
 });
+
+// ── LOGO ──
+function applyLogo(t){
+  const data=t.logoData||null;
+  const size=t.logoSize||120;
+  const lx=t.logoX!==undefined?t.logoX:50;
+  const ly=t.logoY!==undefined?t.logoY:10;
+  // Helper to position logo absolutely
+  function posLogo(wrap,img){
+    if(!wrap||!img)return;
+    if(data){
+      wrap.style.display='block';
+      wrap.style.position='absolute';
+      wrap.style.left=lx+'%';
+      wrap.style.top=ly+'%';
+      wrap.style.transform='translate(-50%,-50%)';
+      wrap.style.zIndex='8';
+      wrap.style.pointerEvents='none';
+      img.src=data;
+      img.style.width=size+'px';
+      img.style.maxHeight=(size*0.8)+'px';
+      img.style.objectFit='contain';
+    } else {
+      wrap.style.display='none';
+    }
+  }
+  // Entry logo — parent needs position:relative
+  const entryEl=document.getElementById('entry');
+  if(entryEl)entryEl.style.position='relative';
+  posLogo(document.getElementById('entryLogo'),document.getElementById('entryLogoImg'));
+  // Stage logo — parent stage already relative
+  posLogo(document.getElementById('stageLogo'),document.getElementById('stageLogoImg'));
+  // Preview in admin
+  const pv=document.getElementById('logoPreview');
+  const pvi=document.getElementById('logoPreviewImg');
+  if(pv&&pvi){if(data){pv.style.display='block';pvi.src=data;}else{pv.style.display='none';}}
+  // Update admin inputs
+  const ls=document.getElementById('inpLogoSize');if(ls)ls.value=size;
+  const lxInp=document.getElementById('inpLogoX');if(lxInp)lxInp.value=lx;
+  const lyInp=document.getElementById('inpLogoY');if(lyInp)lyInp.value=ly;
+  const lxVal=document.getElementById('logoXVal');if(lxVal)lxVal.textContent=lx+'%';
+  const lyVal=document.getElementById('logoYVal');if(lyVal)lyVal.textContent=ly+'%';
+  const posRow=document.getElementById('logoPosRow');if(posRow)posRow.style.display=data?'flex':'none';
+}
 
 // ── STARS ──
 function initStars(){
