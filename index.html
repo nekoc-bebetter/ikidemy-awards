@@ -218,7 +218,7 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
     <div class="at-lines"><div class="at-line"></div><div class="at-line"></div><div class="at-line"></div></div>
     <span class="at-label">ADMIN</span>
   </div>
-  <div class="entry-ver">v2025.10</div>
+  <div class="entry-ver">v2025.11</div>
 </div>
 
 <div class="clap-flash" id="clapFlash"></div>
@@ -587,6 +587,8 @@ function enterMode(m){
 
 function switchToAdmin(){
   role='admin';
+  document.getElementById('entry').style.display='none';
+  document.getElementById('adminTrigger').style.display='none';
   document.body.classList.remove('display-mode');
   ['admWrap','prizeAdm','themeAdm','drawArea'].forEach(id=>document.getElementById(id).style.display='block');
   document.getElementById('dispBadge').style.display='none';
