@@ -219,7 +219,7 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
     <span class="at-label">ADMIN</span>
   </div>
   <div id="entryLogo" style="display:none;margin-top:.5rem;"><img id="entryLogoImg" style="border-radius:8px;object-fit:contain;" src="" alt="logo"></div>
-  <div class="entry-ver" style="display:none;">v2025.26</div>
+  <div class="entry-ver" style="display:none;">v2025.27</div>
 </div>
 
 <div class="clap-flash" id="clapFlash"></div>
@@ -387,7 +387,15 @@ const firebaseConfig={
 const fbApp=initializeApp(firebaseConfig);
 const db=getDatabase(fbApp);
 const DB=ref(db,'ika_v8');
-const ADMIN_PASSWORD='ikidemy2025';
+const ADMIN_PASSWORD_HASH='e4695962e3153f7225984afbf3f9c27ecec8e702544f9f523f4404fbee074954';
+async function checkPassword(input){
+  const encoder=new TextEncoder();
+  const data=encoder.encode(input);
+  const hashBuffer=await crypto.subtle.digest('SHA-256',data);
+  const hashArray=Array.from(new Uint8Array(hashBuffer));
+  const hashHex=hashArray.map(b=>b.toString(16).padStart(2,'0')).join('');
+  return hashHex===ADMIN_PASSWORD_HASH;
+}
 
 const BGS=["#1a1028","#0d1a28","#1a100d","#0d1a14","#1a1810","#1a0d1a"];
 const CLS=["#b090e0","#60a8d8","#d09060","#60c890","#d0c060","#d060a0"];
@@ -560,8 +568,10 @@ document.getElementById('adminTrigger').addEventListener('click',()=>{
 });
 document.getElementById('pwConfirm').addEventListener('click',checkPw);
 document.getElementById('pwInp').addEventListener('keydown',e=>{if(e.key==='Enter')checkPw();});
-function checkPw(){
-  if(document.getElementById('pwInp').value===ADMIN_PASSWORD){
+async function checkPw(){
+  const val=document.getElementById('pwInp').value;
+  const ok=await checkPassword(val);
+  if(ok){
     document.getElementById('pwModal').style.display='none';
     switchToAdmin();
   } else {
