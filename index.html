@@ -19,26 +19,29 @@ body{font-family:'Cormorant Garamond',Georgia,serif;color:var(--gold-light);over
 .ld-dot:nth-child(2){animation-delay:.2s;}.ld-dot:nth-child(3){animation-delay:.4s;}
 @keyframes ldp{0%,80%,100%{opacity:.2;}40%{opacity:1;}}
 
-/* CLAPPERBOARD ENTRY */
-#entry{position:fixed;top:0;left:0;width:100%;height:100%;background:#07060a;z-index:100;display:none;flex-direction:column;align-items:center;justify-content:center;gap:2rem;}
-.entry-title{font-family:'Playfair Display',serif;font-size:22px;letter-spacing:8px;color:var(--gold);text-align:center;}
-.entry-sub{font-size:11px;letter-spacing:5px;color:var(--gold-dim);text-align:center;}
-.clapper-wrap{cursor:pointer;user-select:none;}
-.clapper{width:220px;position:relative;}
-.clapper-body{background:#1a1a1a;border:2px solid #333;border-radius:4px;padding:14px 16px;}
-.clapper-stripes{display:flex;height:14px;overflow:hidden;border-radius:2px;margin-bottom:10px;}
-.stripe{flex:1;}.stripe.black{background:#111;}.stripe.white{background:#ddd;}
-.clapper-text{font-size:10px;letter-spacing:2px;color:#888;text-align:center;line-height:1.8;}
-.clapper-text b{color:#c9a84c;display:block;font-size:13px;letter-spacing:3px;}
-.clapper-arm{position:absolute;top:-22px;left:0;width:100%;height:24px;background:#1a1a1a;border:2px solid #333;border-radius:2px;transform-origin:left center;transition:transform .08s ease-out;}
-.clapper-arm-stripes{display:flex;height:100%;overflow:hidden;border-radius:1px;}
-.clapper-arm .stripe.black{background:#111;}.clapper-arm .stripe.white{background:#ccc;}
-.clapper-hint{font-size:11px;color:#3a2a2a;letter-spacing:3px;text-align:center;margin-top:.5rem;}
-.clap-flash{position:fixed;top:0;left:0;width:100%;height:100%;background:white;opacity:0;pointer-events:none;z-index:150;}
+/* ENTRY */
+#entry{position:fixed;top:0;left:0;width:100%;height:100%;background:#07060a;z-index:100;display:none;flex-direction:column;align-items:center;justify-content:center;gap:1.8rem;}
+.entry-pre{font-size:11px;letter-spacing:8px;color:#8a7a5a;text-align:center;}
+.entry-main{font-family:'Playfair Display',serif;font-size:22px;letter-spacing:6px;color:var(--gold);text-align:center;}
+.entry-sub{font-size:10px;letter-spacing:7px;color:#5a4a3a;text-align:center;}
 .entry-ver{font-size:10px;color:#1a1228;letter-spacing:2px;font-family:monospace;margin-top:.5rem;}
+.clapper-hint{font-size:11px;color:#4a3a2a;letter-spacing:4px;text-align:center;}
 
-/* PASSWORD MODAL */
-#pwModal{position:fixed;top:0;left:0;width:100%;height:100%;z-index:300;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.7);}
+/* CLAPPERBOARD */
+.clapper{width:260px;position:relative;cursor:pointer;user-select:none;margin-top:2rem;}
+.arm{position:absolute;top:-37px;left:0;right:0;height:34px;background:#111;border:3px solid #222;border-radius:3px 3px 0 0;transform-origin:left center;transition:transform .07s ease-out;overflow:hidden;}
+.screws-row{display:flex;justify-content:space-between;position:absolute;top:50%;left:10px;right:10px;transform:translateY(-50%);z-index:3;pointer-events:none;}
+.screw{width:9px;height:9px;border-radius:50%;background:#333;border:1.5px solid #555;}
+.clap-body{background:#111;border:3px solid #222;border-top:none;border-radius:0 0 4px 4px;overflow:hidden;}
+.body-stripe{height:32px;overflow:hidden;}
+.clap-info{padding:12px 14px;text-align:center;}
+.clap-title{font-family:'Playfair Display',serif;font-size:13px;letter-spacing:3px;color:var(--gold);display:block;margin-bottom:4px;}
+.clap-sub{font-size:9px;letter-spacing:2px;color:#888;line-height:2;}
+
+.clap-flash{position:fixed;top:0;left:0;width:100%;height:100%;background:white;opacity:0;pointer-events:none;z-index:150;}
+
+/* PASSWORD */
+#pwModal{position:fixed;top:0;left:0;width:100%;height:100%;z-index:300;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.75);}
 .pw-box{background:#0d0b10;border:1px solid var(--border);border-radius:8px;padding:2rem;display:flex;flex-direction:column;gap:1rem;width:280px;align-items:center;}
 .pw-title{font-family:'Playfair Display',serif;font-size:14px;letter-spacing:4px;color:var(--gold-dim);}
 .pw-inp{background:var(--pd);border:1px solid var(--border);color:var(--gold-light);font-size:14px;padding:8px 12px;border-radius:4px;width:100%;font-family:'Cormorant Garamond',serif;text-align:center;letter-spacing:2px;}
@@ -46,12 +49,15 @@ body{font-family:'Cormorant Garamond',Georgia,serif;color:var(--gold-light);over
 .pw-btn{padding:8px 24px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:12px;letter-spacing:4px;cursor:pointer;border-radius:4px;font-family:'Playfair Display',serif;}
 .pw-btn:hover{background:rgba(201,168,76,.08);}
 .pw-err{font-size:11px;color:#c05060;letter-spacing:2px;display:none;}
-.admin-trigger{position:fixed;bottom:16px;left:16px;z-index:50;cursor:pointer;opacity:.3;transition:opacity .3s;}
-.admin-trigger:hover{opacity:.8;}
-.admin-trigger-icon{width:28px;height:20px;display:flex;flex-direction:column;gap:4px;justify-content:center;}
-.at-line{height:1px;background:var(--gold-dim);}
 
-/* ADMIN */
+/* ADMIN TRIGGER */
+.admin-trigger{position:fixed;bottom:16px;left:16px;z-index:50;cursor:pointer;display:flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid #3a2a1a;border-radius:4px;background:rgba(201,168,76,.04);opacity:.5;transition:opacity .3s;}
+.admin-trigger:hover{opacity:1;}
+.at-lines{display:flex;flex-direction:column;gap:3px;}
+.at-line{height:1.5px;width:16px;background:var(--gold-dim);}
+.at-label{font-size:9px;color:var(--gold-dim);letter-spacing:3px;font-family:'Playfair Display',serif;}
+
+/* ADMIN UI */
 #admWrap{background:var(--bg2);border-bottom:1px solid var(--border);position:relative;z-index:20;}
 .adm-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:.7rem 1.2rem;}
 .adm-lbl{font-size:13px;color:var(--gold-dim);letter-spacing:3px;font-family:'Playfair Display',serif;}
@@ -69,6 +75,8 @@ body{font-family:'Cormorant Garamond',Georgia,serif;color:var(--gold-light);over
 .thumb img,.tav{width:100%;height:100%;object-fit:cover;}
 .tav{display:flex;align-items:center;justify-content:center;font-size:15px;}
 .tdel{position:absolute;top:-2px;right:-2px;width:14px;height:14px;border-radius:50%;background:#120810;color:#b05060;font-size:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid #3a1a2a;}
+
+/* PRIZE ADMIN */
 #prizeAdm{background:var(--bg3);border-bottom:1px solid #1a1820;padding:.8rem 1.2rem;position:relative;z-index:20;}
 .pa-t{font-size:12px;letter-spacing:3px;color:var(--gold-dim);margin-bottom:8px;font-family:'Playfair Display',serif;}
 .prize-list{display:flex;flex-direction:column;gap:7px;}
@@ -86,9 +94,11 @@ body{font-family:'Cormorant Garamond',Georgia,serif;color:var(--gold-light);over
 .adm-btns{margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
 .reset-btn{margin-left:auto;padding:6px 14px;border:1px solid #5a2a2a;background:transparent;color:#8a4a4a;font-size:12px;cursor:pointer;border-radius:3px;font-family:'Cormorant Garamond',serif;transition:all .2s;}
 .reset-btn:hover{border-color:#c05060;color:#c05060;}
+
+/* THEME ADMIN */
 #themeAdm{background:#090810;border-bottom:1px solid #1a1820;padding:.8rem 1.2rem;position:relative;z-index:20;}
 .theme-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:7px;}
-.theme-lbl{font-size:11px;color:var(--gold-dim);letter-spacing:2px;width:72px;flex-shrink:0;}
+.theme-lbl{font-size:11px;color:var(--gold-dim);letter-spacing:2px;width:80px;flex-shrink:0;}
 .theme-inp{background:var(--pd);border:1px solid var(--border);color:var(--gold-light);font-size:13px;padding:5px 9px;border-radius:3px;font-family:'Cormorant Garamond',serif;flex:1;min-width:150px;}
 .theme-inp:focus{outline:none;border-color:#5a4a6a;}
 .font-btn{padding:5px 12px;border:1px solid var(--border);background:transparent;color:var(--gold-dim);font-size:11px;cursor:pointer;border-radius:3px;transition:all .2s;white-space:nowrap;}
@@ -105,6 +115,7 @@ body{font-family:'Cormorant Garamond',Georgia,serif;color:var(--gold-light);over
 .spot.sl{left:6%;transform:rotate(-18deg);}.spot.sr{right:6%;transform:rotate(18deg);}.spot.on{opacity:1;}
 .spotBeam{width:100%;height:100%;background:linear-gradient(to bottom,rgba(255,235,130,.12) 0%,rgba(255,220,100,.05) 50%,transparent 100%);}
 .spotSrc{width:14px;height:14px;border-radius:50%;background:rgba(255,245,170,.65);position:absolute;top:0;left:50%;transform:translateX(-50%);}
+
 #stage{position:relative;z-index:5;padding:1.5rem 1rem;display:flex;flex-direction:column;align-items:center;min-height:480px;}
 body.display-mode #stage{padding:3rem 2rem;min-height:100vh;justify-content:center;}
 .filmStrip{display:flex;align-items:center;gap:8px;margin-bottom:1rem;opacity:.28;width:100%;max-width:540px;}
@@ -141,6 +152,7 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
 .dbtn:hover{background:rgba(201,168,76,.08);}.dbtn:disabled{opacity:.25;cursor:not-allowed;}
 .qnote{font-size:11px;color:#4a3a2a;letter-spacing:2px;margin-top:5px;}
 .dispBadge{text-align:center;padding:.6rem;font-size:10px;letter-spacing:4px;color:#2a1a3a;font-family:'Playfair Display',serif;}
+
 #hpanel{position:relative;z-index:5;border-top:1px solid #16121e;padding:.8rem 1.4rem 1.5rem;}
 .hhd{margin-bottom:8px;}.hlbl{font-size:11px;letter-spacing:5px;color:#3a2a3a;font-family:'Playfair Display',serif;}
 .hlist{display:flex;gap:6px;flex-wrap:wrap;}
@@ -149,56 +161,61 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
 .hth img,.htav{width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;font-size:10px;}
 .hn{font-size:12px;color:#a09070;}.hp{font-size:11px;color:#7a6a4a;margin-left:3px;}
 
-/* Effect keyframes */
-@keyframes sweepL{0%{opacity:0;transform:rotate(-35deg);}15%{opacity:1;}80%{opacity:1;}100%{opacity:0;transform:rotate(5deg);}}
-@keyframes sweepR{0%{opacity:0;transform:rotate(35deg);}15%{opacity:1;}80%{opacity:1;}100%{opacity:0;transform:rotate(-5deg);}}
+@keyframes swL{0%{opacity:0;transform:rotate(-35deg);}15%{opacity:1;}80%{opacity:1;}100%{opacity:0;transform:rotate(5deg);}}
+@keyframes swR{0%{opacity:0;transform:rotate(35deg);}15%{opacity:1;}80%{opacity:1;}100%{opacity:0;transform:rotate(-5deg);}}
 .sw-spot{position:absolute;top:0;transform-origin:top center;opacity:0;pointer-events:none;width:180px;height:120%;}
-.sw-spot.l{left:15%;animation:sweepL 4s ease-in-out forwards;}
-.sw-spot.r{right:15%;animation:sweepR 4s ease-in-out forwards;}
+.sw-spot.l{left:15%;animation:swL 4s ease-in-out forwards;}
+.sw-spot.r{right:15%;animation:swR 4s ease-in-out forwards;}
 .sw-beam{width:100%;height:100%;background:linear-gradient(to bottom,rgba(255,255,200,.22) 0%,rgba(255,230,100,.08) 50%,transparent 100%);}
 #dbg{position:fixed;bottom:6px;right:8px;font-size:9px;color:#1a1228;font-family:monospace;z-index:99;pointer-events:none;text-align:right;max-width:300px;}
 </style>
 </head>
 <body>
 
-<!-- LOADING -->
 <div id="loading">
   <div class="ld-title">THE IKIDEMY AWARDS NIGHT</div>
   <div class="ld-dots"><div class="ld-dot"></div><div class="ld-dot"></div><div class="ld-dot"></div></div>
 </div>
 
-<!-- CLAPPERBOARD ENTRY -->
+<!-- ENTRY -->
 <div id="entry">
-  <div class="entry-title">THE IKIDEMY AWARDS NIGHT</div>
-  <div class="entry-sub">LUCKY DRAW</div>
-  <div class="clapper-wrap" id="clapperBtn">
-    <div class="clapper" id="clapper">
-      <div class="clapper-arm" id="clapperArm">
-        <div class="clapper-arm-stripes">
-          <div class="stripe black"></div><div class="stripe white"></div><div class="stripe black"></div>
-          <div class="stripe white"></div><div class="stripe black"></div><div class="stripe white"></div>
-          <div class="stripe black"></div><div class="stripe white"></div>
-        </div>
+  <div class="entry-pre" id="entryPre">THE IKIDEMY PRESENTS</div>
+  <div class="entry-main" id="entryMain">THE IKIDEMY AWARDS NIGHT</div>
+  <div class="entry-sub" id="entrySub">LUCKY DRAW</div>
+
+  <div class="clapper" id="clapper">
+    <div class="arm" id="clapArm">
+      <div class="screws-row"><div class="screw"></div><div class="screw"></div></div>
+      <svg width="100%" height="100%" viewBox="0 0 260 34" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="260" height="34" fill="#111"/>
+        <polygon points="135,0 155,0 175,34 155,34" fill="white"/>
+        <polygon points="163,0 183,0 203,34 183,34" fill="white"/>
+        <polygon points="191,0 211,0 231,34 211,34" fill="white"/>
+      </svg>
+    </div>
+    <div class="clap-body">
+      <div class="body-stripe">
+        <svg width="100%" height="100%" viewBox="0 0 260 32" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="260" height="32" fill="#111"/>
+          <polygon points="155,0 175,0 155,32 135,32" fill="white"/>
+          <polygon points="183,0 203,0 183,32 163,32" fill="white"/>
+          <polygon points="211,0 231,0 211,32 191,32" fill="white"/>
+        </svg>
       </div>
-      <div class="clapper-body">
-        <div class="clapper-stripes">
-          <div class="stripe black"></div><div class="stripe white"></div><div class="stripe black"></div>
-          <div class="stripe white"></div><div class="stripe black"></div><div class="stripe white"></div>
-          <div class="stripe black"></div><div class="stripe white"></div><div class="stripe black"></div>
-        </div>
-        <div class="clapper-text">
-          <b>IKIDEMY AWARDS</b>
-          LUCKY DRAW &nbsp;·&nbsp; 2025<br>
-          SCENE 1 &nbsp;·&nbsp; TAKE 1
-        </div>
+      <div class="clap-info">
+        <span class="clap-title" id="clapTitle">IKIDEMY AWARDS</span>
+        <div class="clap-sub" id="clapSub">LUCKY DRAW · 2026<br>SCENE 1 · TAKE 1</div>
       </div>
     </div>
-    <div class="clapper-hint">點擊打板，開始抽獎</div>
   </div>
-  <div class="entry-ver">v2025.7</div>
+
+  <div class="clapper-hint">▶ 點擊打板，開始抽獎</div>
+  <div class="entry-ver">v2025.8</div>
 </div>
 
-<!-- PASSWORD MODAL -->
+<div class="clap-flash" id="clapFlash"></div>
+
+<!-- PASSWORD -->
 <div id="pwModal">
   <div class="pw-box">
     <div class="pw-title">&#9670; BACKSTAGE ACCESS</div>
@@ -208,13 +225,11 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
   </div>
 </div>
 
-<!-- ADMIN TRIGGER (bottom-left) -->
+<!-- ADMIN TRIGGER -->
 <div class="admin-trigger" id="adminTrigger" style="display:none">
-  <div class="admin-trigger-icon"><div class="at-line"></div><div class="at-line"></div><div class="at-line"></div></div>
+  <div class="at-lines"><div class="at-line"></div><div class="at-line"></div><div class="at-line"></div></div>
+  <span class="at-label">ADMIN</span>
 </div>
-
-<!-- FLASH -->
-<div class="clap-flash" id="clapFlash"></div>
 
 <!-- ADMIN -->
 <div id="admWrap" style="display:none">
@@ -231,6 +246,7 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
   </div>
   <div class="strip" id="strip"></div>
 </div>
+
 <div id="prizeAdm" style="display:none">
   <div class="pa-t">&#9670; 獎項設定</div>
   <div class="prize-list" id="prizeList"></div>
@@ -240,17 +256,32 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
     <button class="reset-btn" id="resetBtn">&#9675; 重置所有紀錄</button>
   </div>
 </div>
+
 <div id="themeAdm" style="display:none">
   <div class="pa-t">&#9670; 主題文字與字型</div>
   <div class="theme-row">
     <span class="theme-lbl">頂部小字</span>
     <input class="theme-inp" id="inpPre" type="text" placeholder="THE IKIDEMY PRESENTS">
-    <span class="theme-lbl" style="width:55px;">主標題</span>
+  </div>
+  <div class="theme-row">
+    <span class="theme-lbl">主標題</span>
     <input class="theme-inp" id="inpMain" type="text" placeholder="THE IKIDEMY AWARDS NIGHT">
   </div>
   <div class="theme-row">
     <span class="theme-lbl">副標題</span>
     <input class="theme-inp" id="inpSub" type="text" placeholder="LUCKY DRAW">
+  </div>
+  <div class="theme-row" style="border-top:1px solid #1a1820;padding-top:8px;margin-top:2px;">
+    <span class="theme-lbl" style="color:#5a4a6a;">打板標題</span>
+    <input class="theme-inp" id="inpClapTitle" type="text" placeholder="IKIDEMY AWARDS">
+  </div>
+  <div class="theme-row">
+    <span class="theme-lbl" style="color:#5a4a6a;">打板第二行</span>
+    <input class="theme-inp" id="inpClapSub1" type="text" placeholder="LUCKY DRAW · 2026">
+  </div>
+  <div class="theme-row">
+    <span class="theme-lbl" style="color:#5a4a6a;">打板第三行</span>
+    <input class="theme-inp" id="inpClapSub2" type="text" placeholder="SCENE 1 · TAKE 1">
   </div>
   <div class="theme-row">
     <span class="theme-lbl">字型</span>
@@ -261,7 +292,7 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
   </div>
 </div>
 
-<!-- STAGE BG -->
+<!-- STAGE -->
 <div id="stageBg">
   <canvas id="starCanvas"></canvas>
   <div class="spot sl" id="spotL"><div class="spotSrc"></div><div class="spotBeam"></div></div>
@@ -269,7 +300,6 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
   <div class="curtL"></div><div class="curtR"></div><div class="floorLine"></div>
 </div>
 
-<!-- STAGE -->
 <div id="stage" style="display:none">
   <div class="filmStrip">
     <div class="fhs"><div class="fh"></div><div class="fh"></div><div class="fh"></div></div>
@@ -289,6 +319,7 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
   </div>
   <div class="dispBadge" id="dispBadge" style="display:none">&#9675; DISPLAY MODE</div>
 </div>
+
 <div id="hpanel" style="display:none">
   <div class="hhd"><span class="hlbl">WINNERS TONIGHT</span></div>
   <div class="hlist" id="hlist"></div>
@@ -308,30 +339,31 @@ const firebaseConfig={
 };
 const fbApp=initializeApp(firebaseConfig);
 const db=getDatabase(fbApp);
-const DB=ref(db,'ika_v7');
+const DB=ref(db,'ika_v8');
 const ADMIN_PASSWORD='ikidemy2025';
 
 const BGS=["#1a1028","#0d1a28","#1a100d","#0d1a14","#1a1810","#1a0d1a"];
 const CLS=["#b090e0","#60a8d8","#d09060","#60c890","#d0c060","#d060a0"];
 const FX_OPTIONS=[
-  {k:'sweep',   label:'聚光燈掃過'},
-  {k:'stars',   label:'星星閃爍'},
-  {k:'rise',    label:'金粒子上飄'},
-  {k:'smoke',   label:'彩色煙霧'},
-  {k:'lightning',label:'閃電劈下'},
-  {k:'cannon',  label:'彩色拉炮'},
+  {k:'sweep',label:'聚光燈掃過'},{k:'stars',label:'星星閃爍'},
+  {k:'rise',label:'金粒子上飄'},{k:'smoke',label:'彩色煙霧'},
+  {k:'lightning',label:'閃電劈下'},{k:'colorful',label:'彩色紙片'},
 ];
 const FONTS=[
   {k:'Playfair Display',label:'Playfair'},{k:'Cormorant Garamond',label:'Cormorant'},
   {k:'Cinzel',label:'Cinzel'},{k:'Josefin Sans',label:'Josefin'},
   {k:'EB Garamond',label:'EB Garamond'},{k:'Manrope',label:'Manrope'},
 ];
-const DEFAULT_THEME={pre:'THE IKIDEMY PRESENTS',main:'THE IKIDEMY AWARDS NIGHT',sub:'LUCKY DRAW',font:'Playfair Display'};
+const DEFAULT_THEME={
+  pre:'THE IKIDEMY PRESENTS',main:'THE IKIDEMY AWARDS NIGHT',sub:'LUCKY DRAW',
+  font:'Playfair Display',
+  clapTitle:'IKIDEMY AWARDS',clapSub1:'LUCKY DRAW · 2026',clapSub2:'SCENE 1 · TAKE 1'
+};
 
 let role=null,spinIv=null,lastPushedSeq=-1,firstRead=true;
 let S={
   prizes:[
-    {name:"Grand Prize",amt:"NT$30,000",quota:1,fx:"cannon"},
+    {name:"Grand Prize",amt:"NT$30,000",quota:1,fx:"colorful"},
     {name:"First Prize",amt:"NT$20,000",quota:2,fx:"sweep"},
     {name:"Second Prize",amt:"NT$10,000",quota:10,fx:"stars"},
     {name:"Third Prize",amt:"NT$8,000",quota:10,fx:"stars"},
@@ -339,7 +371,7 @@ let S={
     {name:"Fifth Prize",amt:"NT$3,000",quota:21,fx:"rise"},
   ],
   photos:[],drawn:[],hist:[],ap:0,
-  phase:'idle',winner:null,cpname:'',cpamt:'',cpfx:'cannon',cpisGrand:false,seq:0,
+  phase:'idle',winner:null,cpname:'',cpamt:'',cpfx:'colorful',cpisGrand:false,seq:0,
   theme:Object.assign({},DEFAULT_THEME)
 };
 
@@ -351,7 +383,6 @@ function pushState(cb){
 }
 function mergeTheme(d){return Object.assign({},DEFAULT_THEME,d||{});}
 
-// ── FIREBASE ──
 onValue(DB,snap=>{
   syncOk(true);const d=snap.val();
   log('recv seq='+(d?d.seq:'null')+' phase='+(d?d.phase:'?'));
@@ -360,6 +391,7 @@ onValue(DB,snap=>{
     if(d){S=Object.assign({},S,d);S.theme=mergeTheme(d.theme);lastPushedSeq=S.seq;}
     document.getElementById('loading').style.display='none';
     document.getElementById('entry').style.display='flex';
+    applyClapperText();
     return;
   }
   if(!d)return;
@@ -367,7 +399,7 @@ onValue(DB,snap=>{
   if(role==='admin'){
     if(inc===lastPushedSeq){log('echo skip');return;}
     S=Object.assign({},S,d);S.theme=mergeTheme(d.theme);
-    renderAdmin();renderHist();applyTheme();
+    renderAdmin();renderHist();applyTheme();applyClapperText();
     if(S.phase==='winner'&&S.winner)restoreWinnerAdmin();
     return;
   }
@@ -375,29 +407,37 @@ onValue(DB,snap=>{
     const prev=S.seq||0;S=Object.assign({},S,d);S.theme=mergeTheme(d.theme);
     applyTheme();renderHist();if(inc===prev)return;
     if(S.phase==='spinning'){stopSpin();showSpinUI();}
-    else if(S.phase==='winner'&&S.winner){stopSpin();showWinnerUI(S.winner,S.cpname,S.cpamt);runEffect(S.cpfx||'cannon',S.cpisGrand||false);}
+    else if(S.phase==='winner'&&S.winner){stopSpin();showWinnerUI(S.winner,S.cpname,S.cpamt);runEffect(S.cpfx,S.cpisGrand);}
     else if(S.phase==='idle'){stopSpin();setIdle();}
   }
 },e=>{syncOk(false);if(firstRead){firstRead=false;document.getElementById('loading').style.display='none';document.getElementById('entry').style.display='flex';}});
 
-// ── CLAPPER ──
-const clapperBtn=document.getElementById('clapperBtn');
-const clapperArm=document.getElementById('clapperArm');
+// ── CLAPPER TEXT ──
+function applyClapperText(){
+  const t=S.theme||DEFAULT_THEME;
+  document.getElementById('entryPre').textContent=t.pre||DEFAULT_THEME.pre;
+  document.getElementById('entryMain').textContent=t.main||DEFAULT_THEME.main;
+  document.getElementById('entrySub').textContent=t.sub||DEFAULT_THEME.sub;
+  document.getElementById('clapTitle').textContent=t.clapTitle||DEFAULT_THEME.clapTitle;
+  document.getElementById('clapSub').innerHTML=(t.clapSub1||DEFAULT_THEME.clapSub1)+'<br>'+(t.clapSub2||DEFAULT_THEME.clapSub2);
+  const f=t.font||'Playfair Display';
+  document.getElementById('entryMain').style.fontFamily=`'${f}',serif`;
+  document.getElementById('clapTitle').style.fontFamily=`'${f}',serif`;
+}
+
+// ── CLAPPER INTERACTION ──
+const clapArm=document.getElementById('clapArm');
+const clapFlash=document.getElementById('clapFlash');
 let clapDone=false;
-clapperBtn.addEventListener('click',()=>{
-  if(clapDone)return;
-  clapDone=true;
-  clapperArm.style.transform='rotate(-45deg)';
+document.getElementById('clapper').addEventListener('click',()=>{
+  if(clapDone)return;clapDone=true;
+  clapArm.style.transform='rotate(-52deg)';
   setTimeout(()=>{
-    clapperArm.style.transform='rotate(0deg)';
-    const flash=document.getElementById('clapFlash');
-    flash.style.transition='opacity 0.05s';flash.style.opacity='0.9';
-    setTimeout(()=>{flash.style.transition='opacity 0.4s';flash.style.opacity='0';},80);
-    setTimeout(()=>{
-      document.getElementById('entry').style.display='none';
-      enterMode('display');
-    },300);
-  },100);
+    clapArm.style.transform='rotate(0deg)';
+    clapFlash.style.transition='opacity 0.04s';clapFlash.style.opacity='0.9';
+    setTimeout(()=>{clapFlash.style.transition='opacity 0.45s';clapFlash.style.opacity='0';},65);
+    setTimeout(()=>{document.getElementById('entry').style.display='none';enterMode('display');},300);
+  },85);
 });
 
 // ── PASSWORD ──
@@ -410,8 +450,7 @@ document.getElementById('adminTrigger').addEventListener('click',()=>{
 document.getElementById('pwConfirm').addEventListener('click',checkPw);
 document.getElementById('pwInp').addEventListener('keydown',e=>{if(e.key==='Enter')checkPw();});
 function checkPw(){
-  const val=document.getElementById('pwInp').value;
-  if(val===ADMIN_PASSWORD){
+  if(document.getElementById('pwInp').value===ADMIN_PASSWORD){
     document.getElementById('pwModal').style.display='none';
     switchToAdmin();
   } else {
@@ -420,9 +459,7 @@ function checkPw(){
     document.getElementById('pwInp').focus();
   }
 }
-document.getElementById('pwModal').addEventListener('click',e=>{
-  if(e.target===document.getElementById('pwModal'))document.getElementById('pwModal').style.display='none';
-});
+document.getElementById('pwModal').addEventListener('click',e=>{if(e.target===document.getElementById('pwModal'))document.getElementById('pwModal').style.display='none';});
 
 // ── HELPERS ──
 function avail(){return(S.photos||[]).filter(p=>!(S.drawn||[]).includes(p.id));}
@@ -452,10 +489,14 @@ function applyTheme(){
   document.getElementById('subTitle').textContent=t.sub||DEFAULT_THEME.sub;
   document.getElementById('subTitle').style.fontFamily=`'${f}',serif`;
   document.querySelectorAll('.font-btn').forEach(btn=>btn.classList.toggle('active',btn.dataset.font===f));
+  applyClapperText();
   if(role==='admin'){
     document.getElementById('inpPre').value=t.pre||DEFAULT_THEME.pre;
     document.getElementById('inpMain').value=t.main||DEFAULT_THEME.main;
     document.getElementById('inpSub').value=t.sub||DEFAULT_THEME.sub;
+    document.getElementById('inpClapTitle').value=t.clapTitle||DEFAULT_THEME.clapTitle;
+    document.getElementById('inpClapSub1').value=t.clapSub1||DEFAULT_THEME.clapSub1;
+    document.getElementById('inpClapSub2').value=t.clapSub2||DEFAULT_THEME.clapSub2;
   }
 }
 function buildFontBtns(){
@@ -480,7 +521,7 @@ function enterMode(m){
     document.body.classList.add('display-mode');
     ['admWrap','prizeAdm','themeAdm','drawArea'].forEach(id=>document.getElementById(id).style.display='none');
     document.getElementById('dispBadge').style.display='block';
-    document.getElementById('adminTrigger').style.display='block';
+    document.getElementById('adminTrigger').style.display='flex';
     if(S.phase==='winner'&&S.winner)showWinnerUI(S.winner,S.cpname,S.cpamt);
     else if(S.phase==='spinning')showSpinUI();
     else setIdle();
@@ -527,10 +568,7 @@ function renderPrizeList(){
     const qInp=document.createElement('input');qInp.className='pi pi-q';qInp.type='number';qInp.min='1';qInp.value=p.quota;
     qInp.addEventListener('input',()=>{S.prizes[i].quota=parseInt(qInp.value)||1;});
     const fxSel=document.createElement('select');fxSel.className='pi-fx';
-    FX_OPTIONS.forEach(fx=>{
-      const opt=document.createElement('option');opt.value=fx.k;opt.textContent=fx.label;
-      if((p.fx||'cannon')===fx.k)opt.selected=true;fxSel.appendChild(opt);
-    });
+    FX_OPTIONS.forEach(fx=>{const opt=document.createElement('option');opt.value=fx.k;opt.textContent=fx.label;if((p.fx||'colorful')===fx.k)opt.selected=true;fxSel.appendChild(opt);});
     fxSel.addEventListener('change',()=>{S.prizes[i].fx=fxSel.value;});
     const pw2=document.createElement('span');pw2.className='pw2';pw2.textContent=won(i)+'已抽';
     row.append(arBtn,nameInp,amtInp,qLbl,qInp,fxSel,pw2);
@@ -588,6 +626,9 @@ document.getElementById('themeApplyBtn').addEventListener('click',()=>{
     pre:document.getElementById('inpPre').value.trim()||DEFAULT_THEME.pre,
     main:document.getElementById('inpMain').value.trim()||DEFAULT_THEME.main,
     sub:document.getElementById('inpSub').value.trim()||DEFAULT_THEME.sub,
+    clapTitle:document.getElementById('inpClapTitle').value.trim()||DEFAULT_THEME.clapTitle,
+    clapSub1:document.getElementById('inpClapSub1').value.trim()||DEFAULT_THEME.clapSub1,
+    clapSub2:document.getElementById('inpClapSub2').value.trim()||DEFAULT_THEME.clapSub2,
   });
   S.seq=(S.seq||0)+1;pushState();applyTheme();
 });
@@ -629,17 +670,28 @@ function setIdle(){document.getElementById('cbox').innerHTML='<span class="idleT
 // ── EFFECTS ──
 function runEffect(fx,isGrand){
   const m=isGrand?2.5:1;
-  if(fx==='sweep')fxSweep(m);
-  else if(fx==='stars')fxStars(m);
-  else if(fx==='rise')fxRise(m);
-  else if(fx==='smoke')fxSmoke(m);
-  else if(fx==='lightning')fxLightning(m);
-  else fxCannon(m);
+  if(fx==='sweep')fxSweep(m);else if(fx==='stars')fxStars(m);
+  else if(fx==='rise')fxRise(m);else if(fx==='smoke')fxSmoke(m);
+  else if(fx==='lightning')fxLightning(m);else fxColorful(m);
 }
-
 function getCA(){return document.getElementById('ca');}
-
-// 聚光燈掃過 — from top, long duration
+function spawnP(box,count,cols,opts){
+  const{mn=2,mx=8,sp=200,ri=180,rect=false,top=30,dur=2000}=opts||{};
+  for(let i=0;i<count;i++){
+    const el=document.createElement('div');el.className='cp';
+    const c=cols[Math.floor(Math.random()*cols.length)];
+    const x=Math.random()*100,rot=Math.random()*360,w=mn+Math.random()*(mx-mn),h=mn+Math.random()*(mx-mn);
+    el.style.cssText=`left:${x}%;top:${top}%;width:${w}px;height:${h}px;background:${c};transform:rotate(${rot}deg);border-radius:${rect?'2px':'50%'};position:absolute;opacity:0;`;
+    box.appendChild(el);
+    el.animate([{opacity:1,transform:`translate(0,0) rotate(${rot}deg)`},{opacity:0,transform:`translate(${(Math.random()-.5)*sp}px,${-(50+Math.random()*ri)}px) rotate(${rot+720}deg)`}],
+      {duration:dur+Math.random()*1000,easing:'cubic-bezier(.1,.9,.3,1)',fill:'forwards'});
+  }
+}
+function fxColorful(m=1){
+  const b=getCA();if(!b)return;
+  const cols=['#ff6b6b','#ffd93d','#6bcb77','#4d96ff','#ff6bdb','#ff922b','#fff','#c9a84c','#a0f0c0'];
+  spawnP(b,Math.round(70*m),cols,{mn:3,mx:10,sp:280,ri:240,rect:true,top:30,dur:1800});
+}
 function fxSweep(m=1){
   const b=getCA();if(!b)return;
   const times=Math.round(m>=2?3:1);
@@ -654,8 +706,6 @@ function fxSweep(m=1){
   }
   spawnP(b,Math.round(20*m),['#fff8d0','#c9a84c','#ffe066'],{mn:2,mx:5,sp:160,ri:140,dur:3000});
 }
-
-// 星星閃爍 — longer, more stars
 function fxStars(m=1){
   const b=getCA();if(!b)return;
   const cols=['#fff8d0','#ffe066','#ffd700','#fff','#c9a84c','#e8d5a3'];
@@ -665,13 +715,10 @@ function fxStars(m=1){
     const x=Math.random()*100,y=5+Math.random()*85,s=1.5+Math.random()*7;
     el.style.cssText=`position:absolute;left:${x}%;top:${y}%;width:${s}px;height:${s}px;background:${c};border-radius:50%;opacity:0;`;
     b.appendChild(el);
-    const dur=800+Math.random()*1800;const delay=Math.random()*2000;
     el.animate([{opacity:0,transform:'scale(0)'},{opacity:1,transform:'scale(1)'},{opacity:.6,transform:'scale(1.2)'},{opacity:0,transform:'scale(0)'}],
-      {duration:dur,delay,easing:'ease-in-out',fill:'forwards',iterations:m>=2?2:1});
+      {duration:800+Math.random()*1800,delay:Math.random()*2000,easing:'ease-in-out',fill:'forwards',iterations:m>=2?2:1});
   }
 }
-
-// 金粒子上飄 — longer float
 function fxRise(m=1){
   const b=getCA();if(!b)return;
   const cols=['#c9a84c','#f0e0a0','#ffe066','#fff8d0','#d4a830','#e8c870'];
@@ -686,8 +733,6 @@ function fxRise(m=1){
       {duration:2000+Math.random()*2000,delay:Math.random()*1500,easing:'cubic-bezier(.2,.8,.3,1)',fill:'forwards'});
   }
 }
-
-// 彩色煙霧 — bigger, slower
 function fxSmoke(m=1){
   const b=getCA();if(!b)return;
   const cols=['rgba(255,100,100,.45)','rgba(100,180,255,.4)','rgba(180,100,255,.4)','rgba(100,255,160,.35)','rgba(255,220,80,.35)','rgba(255,100,200,.35)'];
@@ -701,8 +746,6 @@ function fxSmoke(m=1){
       {duration:2500+Math.random()*1500,delay:Math.random()*800,easing:'ease-out',fill:'forwards'});
   }
 }
-
-// 閃電劈下 — more strikes, longer glow
 function fxLightning(m=1){
   const b=getCA();if(!b)return;
   const strikes=Math.round(4*m);
@@ -718,64 +761,6 @@ function fxLightning(m=1){
   spawnP(b,Math.round(30*m),['#c8dcff','#a0c0ff','#ffffff','#e8f4ff'],{mn:2,mx:6,sp:180,ri:160,dur:2500});
 }
 
-// 彩色拉炮 — confetti cannon from bottom-left and bottom-right
-function fxCannon(m=1){
-  const b=getCA();if(!b)return;
-  const cols=['#ff6b6b','#ffd93d','#6bcb77','#4d96ff','#ff6bdb','#ff922b','#fff','#c9a84c','#a0f0c0','#f0a0e0'];
-  const salvos=Math.round(m>=2?4:2);
-  for(let salvo=0;salvo<salvos;salvo++){
-    setTimeout(()=>{
-      // Left cannon (bottom-left → upper right)
-      for(let i=0;i<30;i++){
-        const el=document.createElement('div');
-        const c=cols[Math.floor(Math.random()*cols.length)];
-        const w=4+Math.random()*9,h=4+Math.random()*9;
-        const angle=-(20+Math.random()*70)*(Math.PI/180); // shoot upward-right
-        const dist=120+Math.random()*180;
-        const tx=Math.cos(angle)*dist, ty=Math.sin(angle)*dist;
-        const rot=Math.random()*360;
-        el.style.cssText=`position:absolute;left:5%;bottom:5%;width:${w}px;height:${h}px;background:${c};transform:rotate(${rot}deg);border-radius:${Math.random()>.4?'2px':'50%'};opacity:0;`;
-        b.appendChild(el);
-        el.animate([
-          {opacity:1,transform:`rotate(${rot}deg) translate(0,0)`},
-          {opacity:.8,transform:`rotate(${rot+180}deg) translate(${tx*.6}px,${ty*.6}px)`},
-          {opacity:0,transform:`rotate(${rot+360}deg) translate(${tx}px,${ty}px)`}
-        ],{duration:1800+Math.random()*1200,delay:Math.random()*200,easing:'cubic-bezier(.15,.85,.25,1)',fill:'forwards'});
-      }
-      // Right cannon (bottom-right → upper left)
-      for(let i=0;i<30;i++){
-        const el=document.createElement('div');
-        const c=cols[Math.floor(Math.random()*cols.length)];
-        const w=4+Math.random()*9,h=4+Math.random()*9;
-        const angle=-(110+Math.random()*70)*(Math.PI/180);
-        const dist=120+Math.random()*180;
-        const tx=Math.cos(angle)*dist, ty=Math.sin(angle)*dist;
-        const rot=Math.random()*360;
-        el.style.cssText=`position:absolute;right:5%;bottom:5%;width:${w}px;height:${h}px;background:${c};transform:rotate(${rot}deg);border-radius:${Math.random()>.4?'2px':'50%'};opacity:0;`;
-        b.appendChild(el);
-        el.animate([
-          {opacity:1,transform:`rotate(${rot}deg) translate(0,0)`},
-          {opacity:.8,transform:`rotate(${rot+180}deg) translate(${tx*.6}px,${ty*.6}px)`},
-          {opacity:0,transform:`rotate(${rot+360}deg) translate(${tx}px,${ty}px)`}
-        ],{duration:1800+Math.random()*1200,delay:Math.random()*200,easing:'cubic-bezier(.15,.85,.25,1)',fill:'forwards'});
-      }
-    },salvo*800);
-  }
-}
-
-function spawnP(box,count,cols,opts){
-  const{mn=2,mx=8,sp=200,ri=180,rect=false,top=30,dur=2000}=opts||{};
-  for(let i=0;i<count;i++){
-    const el=document.createElement('div');el.className='cp';
-    const c=cols[Math.floor(Math.random()*cols.length)];
-    const x=Math.random()*100,rot=Math.random()*360,w=mn+Math.random()*(mx-mn),h=mn+Math.random()*(mx-mn);
-    el.style.cssText=`left:${x}%;top:${top}%;width:${w}px;height:${h}px;background:${c};transform:rotate(${rot}deg);border-radius:${rect?'2px':'50%'};position:absolute;opacity:0;`;
-    box.appendChild(el);
-    el.animate([{opacity:1,transform:`translate(0,0) rotate(${rot}deg)`},{opacity:0,transform:`translate(${(Math.random()-.5)*sp}px,${-(50+Math.random()*ri)}px) rotate(${rot+720}deg)`}],
-      {duration:dur+Math.random()*1000,easing:'cubic-bezier(.1,.9,.3,1)',fill:'forwards'});
-  }
-}
-
 // ── DRAW ──
 function doDraw(){
   if(role!=='admin')return;
@@ -784,7 +769,7 @@ function doDraw(){
   const rem=p.quota-won(S.ap);if(rem<=0)return;
   const winner=av2[Math.floor(Math.random()*av2.length)];
   const isGrand=S.ap===0;
-  S.phase='spinning';S.cpname=p.name;S.cpamt=p.amt;S.cpfx=p.fx||'cannon';S.cpisGrand=isGrand;S.winner=null;
+  S.phase='spinning';S.cpname=p.name;S.cpamt=p.amt;S.cpfx=p.fx||'colorful';S.cpisGrand=isGrand;S.winner=null;
   S.seq=(S.seq||0)+1;
   document.getElementById('dbtn').disabled=true;document.getElementById('dbtn').textContent='DRAWING...';
   showSpinUI();pushState();
@@ -793,7 +778,7 @@ function doDraw(){
     S.drawn=[...(S.drawn||[]),winner.id];
     S.hist=[...(S.hist||[]),{...winner,pi:S.ap,pname:p.name,pamount:p.amt}];
     S.winner=winner;S.phase='winner';S.seq=(S.seq||0)+1;
-    pushState();showWinnerUI(winner,p.name,p.amt);runEffect(p.fx||'cannon',isGrand);
+    pushState();showWinnerUI(winner,p.name,p.amt);runEffect(p.fx||'colorful',isGrand);
     renderAdmin();renderHist();
     const rem2=p.quota-won(S.ap);
     document.getElementById('dbtn').disabled=rem2<=0;
@@ -811,7 +796,7 @@ function renderHist(){
     <span class="hn">${h.name}</span><span class="hp">${h.pname}</span></div>`).join('');
 }
 
-// ── IMAGE COMPRESS ──
+// ── COMPRESS + UPLOAD ──
 function compressImage(file){
   return new Promise(resolve=>{
     const r=new FileReader();
@@ -838,7 +823,7 @@ document.getElementById('fi').addEventListener('change',function(e){
   });this.value='';
 });
 
-// ── STARS BG ──
+// ── STARS ──
 function initStars(){
   const c=document.getElementById('starCanvas');c.width=window.innerWidth;c.height=window.innerHeight;
   const ctx=c.getContext('2d');
