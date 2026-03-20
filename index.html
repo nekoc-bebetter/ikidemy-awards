@@ -21,9 +21,9 @@ body{font-family:'Cormorant Garamond',Georgia,serif;color:var(--gold-light);over
 
 /* ENTRY */
 #entry{position:fixed;top:0;left:0;width:100%;height:100%;background:#07060a;z-index:100;display:none;flex-direction:column;align-items:center;justify-content:center;gap:1.8rem;}
-.entry-pre{font-size:11px;letter-spacing:8px;color:#8a7a5a;text-align:center;}
+.entry-pre{font-size:11px;letter-spacing:8px;color:#8a7a5a;text-align:center;font-family:'Playfair Display',serif;}
 .entry-main{font-family:'Playfair Display',serif;font-size:22px;letter-spacing:6px;color:var(--gold);text-align:center;}
-.entry-sub{font-size:10px;letter-spacing:7px;color:#5a4a3a;text-align:center;}
+.entry-sub{font-size:10px;letter-spacing:7px;color:#5a4a3a;text-align:center;font-family:'Playfair Display',serif;}
 .entry-ver{font-size:10px;color:#1a1228;letter-spacing:2px;font-family:monospace;margin-top:.5rem;}
 .clapper-hint{font-size:11px;color:#4a3a2a;letter-spacing:4px;text-align:center;}
 
@@ -34,9 +34,9 @@ body{font-family:'Cormorant Garamond',Georgia,serif;color:var(--gold-light);over
 .screw{width:9px;height:9px;border-radius:50%;background:#333;border:1.5px solid #555;}
 .clap-body{background:#111;border:3px solid #222;border-top:none;border-radius:0 0 4px 4px;overflow:hidden;}
 .body-stripe{height:32px;overflow:hidden;}
-.clap-info{padding:12px 14px;text-align:center;}
+.clap-info{padding:12px 14px;text-align:center;font-family:inherit;}
 .clap-title{font-family:'Playfair Display',serif;font-size:13px;letter-spacing:3px;color:var(--gold);display:block;margin-bottom:4px;}
-.clap-sub{font-size:9px;letter-spacing:2px;color:#888;line-height:2;}
+.clap-sub{font-size:9px;letter-spacing:2px;color:#888;line-height:2;font-family:inherit;}
 
 .clap-flash{position:fixed;top:0;left:0;width:100%;height:100%;background:white;opacity:0;pointer-events:none;z-index:150;}
 
@@ -218,7 +218,7 @@ body.display-mode .wAmt{font-size:44px;letter-spacing:5px;margin-top:10px;}
     <div class="at-lines"><div class="at-line"></div><div class="at-line"></div><div class="at-line"></div></div>
     <span class="at-label">ADMIN</span>
   </div>
-  <div class="entry-ver">v2025.18</div>
+  <div class="entry-ver">v2025.20</div>
 </div>
 
 <div class="clap-flash" id="clapFlash"></div>
@@ -456,10 +456,13 @@ onValue(DB,snap=>{
 // ── CLAPPER TEXT ──
 function applyClapperText(){
   const t=S.theme||DEFAULT_THEME;
-  document.getElementById('entryPre').textContent=t.pre||DEFAULT_THEME.pre;
-  document.getElementById('entryMain').textContent=t.main||DEFAULT_THEME.main;
-  document.getElementById('entrySub').textContent=t.sub||DEFAULT_THEME.sub;
   const f=t.font||'Playfair Display';
+  const epEl=document.getElementById('entryPre');
+  if(epEl){epEl.textContent=t.pre||DEFAULT_THEME.pre;epEl.style.fontFamily=`'${f}',serif`;epEl.style.color=t.preColor||DEFAULT_THEME.preColor;epEl.style.fontWeight=t.preBold?'700':'400';epEl.style.fontSize=(t.preSz||DEFAULT_THEME.preSz)+'px';}
+  const emEl=document.getElementById('entryMain');
+  if(emEl){emEl.textContent=t.main||DEFAULT_THEME.main;emEl.style.fontFamily=`'${f}',serif`;emEl.style.color=t.mainColor||DEFAULT_THEME.mainColor;emEl.style.fontWeight=t.mainBold?'700':'400';emEl.style.fontSize=(t.mainSz||DEFAULT_THEME.mainSz)+'px';}
+  const esEl=document.getElementById('entrySub');
+  if(esEl){esEl.textContent=t.sub||DEFAULT_THEME.sub;esEl.style.fontFamily=`'${f}',serif`;esEl.style.color=t.subColor||DEFAULT_THEME.subColor;esEl.style.fontWeight=t.subBold?'700':'400';esEl.style.fontSize=(t.subSz||DEFAULT_THEME.subSz)+'px';}
   const ct=document.getElementById('clapTitle');
   if(ct){
     ct.textContent=t.clapTitle||DEFAULT_THEME.clapTitle;
@@ -474,18 +477,9 @@ function applyClapperText(){
     cs.style.fontSize=(t.clapSub1Sz||DEFAULT_THEME.clapSub1Sz)+'px';
     cs.style.fontWeight=t.clapSub1Bold?'700':'400';
     cs.style.color=t.clapSub1Color||DEFAULT_THEME.clapSub1Color;
+    cs.style.fontFamily=`'${f}',serif`;
   }
-  const em=document.getElementById('entryMain');
-  if(em){
-    em.style.fontFamily=`'${f}',serif`;
-    em.style.fontSize=(t.mainSz||DEFAULT_THEME.mainSz)+'px';
-    em.style.fontWeight=t.mainBold?'700':'400';
-    em.style.color=t.mainColor||DEFAULT_THEME.mainColor;
-  }
-  const ep=document.getElementById('entryPre');
-  if(ep){ep.style.color=t.preColor||DEFAULT_THEME.preColor;}
-  const es=document.getElementById('entrySub');
-  if(es){es.style.color=t.subColor||DEFAULT_THEME.subColor;}
+
 }
 
 // ── CLAPPER INTERACTION ──
